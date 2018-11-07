@@ -5,9 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    title: '',
+    activeComp: ''
   },
   mutations: {
+    switchComp(state, {title,comp}){
+      state.title = title
+      state.comp = comp
+    }
 
   },
   actions: {

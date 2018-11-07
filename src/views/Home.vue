@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <router-link to="/reservation">访客预约</router-link>
+    <p @click="goReservation">访客预约</p>
     <Calculator/>
   </div>
 </template>
@@ -13,6 +13,11 @@ export default {
   name: 'home',
   components: {
     Calculator
+  },
+  methods: {
+    goReservation(){
+      this.$store.commit('switchComp',{title: '访客预约登记', comp: })
+    }
   }
 }
 </script>

@@ -1,8 +1,42 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <mt-header :title="title" fixed>
+      <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
+    </mt-header>
+    <keep-alive>
+      <component :is="avtiveComp"></component>
+    </keep-alive>
   </div>
 </template>
+
+<script>
+import {Header, Button} from 'mint-ui';
+import guestRegister from './views/guests/guestRegister.vue'
+import Reservation from './views/guests/Reservation.vue'
+import Reservation from './views/guests/Reservation.vue'
+export default {
+  name: 'app',
+  components: {
+    Header,
+    Button
+  },
+  data(){
+    return {
+      avtiveComp: this.$store.state.avtiveComp,
+      title: this.$store.state.title
+    }
+  },
+  methods: {
+    goback(){
+        if(history.length>0){
+          this.$router.go(-1)
+        }
+      },
+
+  }
+}
+</script>
+
 
 <style lang="scss">
 @import url('https://cdn.staticfile.org/normalize/8.0.0/normalize.min.css');
