@@ -25,71 +25,71 @@
 
 <script>
 export default {
-  name: "calculator",
-  data() {
+  name: 'calculator',
+  data () {
     return {
-      current: "0",
-      previous: "",
-      optr: "",
+      current: '0',
+      previous: '',
+      optr: '',
       optrFlag: false,
       prctFlag: false
-    };
+    }
   },
   methods: {
-    clear() {
-      this.current = "0";
+    clear () {
+      this.current = '0'
     },
-    back() {
-      this.current = this.current.slice(0, -1);
+    back () {
+      this.current = this.current.slice(0, -1)
       if (!this.current) {
-        this.current = "0";
+        this.current = '0'
       }
     },
-    append(val) {
+    append (val) {
       if (this.prctFlag || this.optrFlag) {
-        this.clear();
+        this.clear()
       }
-      this.prctFlag = false;
-      this.optrFlag = false;
+      this.prctFlag = false
+      this.optrFlag = false
 
-      if (this.current === "0" && val !== ".") {
-        this.current = val;
-      } else if (val !== "." || (val === "." && !this.current.includes("."))) {
-        this.current = this.current + val;
+      if (this.current === '0' && val !== '.') {
+        this.current = val
+      } else if (val !== '.' || (val === '.' && !this.current.includes('.'))) {
+        this.current = this.current + val
       }
     },
-    percent() {
-      this.current = `${Number.parseFloat(this.current) / 100}`;
-      this.prctFlag = true;
+    percent () {
+      this.current = `${Number.parseFloat(this.current) / 100}`
+      this.prctFlag = true
     },
-    operator(optr) {
-      this.previous = this.current;
-      this.optr = optr;
-      this.optrFlag = true;
+    operator (optr) {
+      this.previous = this.current
+      this.optr = optr
+      this.optrFlag = true
     },
-    equals() {
+    equals () {
       if (!this.optrFlag) {
-        let cur = Number.parseFloat(this.current);
-        let prev = Number.parseFloat(this.previous);
+        let cur = Number.parseFloat(this.current)
+        let prev = Number.parseFloat(this.previous)
         switch (this.optr) {
-          case "divide":
-            this.current = `${prev / cur}`;
-            break;
-          case "times":
-            this.current = `${prev * cur}`;
-            break;
-          case "plus":
-            this.current = `${prev + cur}`;
-            break;
-          case "minus":
-            this.current = `${prev - cur}`;
-            break;
+          case 'divide':
+            this.current = `${prev / cur}`
+            break
+          case 'times':
+            this.current = `${prev * cur}`
+            break
+          case 'plus':
+            this.current = `${prev + cur}`
+            break
+          case 'minus':
+            this.current = `${prev - cur}`
+            break
         }
-        this.optrFlag = true;
+        this.optrFlag = true
       }
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

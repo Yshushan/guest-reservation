@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {Header, Button} from 'mint-ui';
+import { Header, Button } from 'mint-ui'
 export default {
   name: 'reservation',
   components: {
@@ -19,13 +19,13 @@ export default {
     Button
   },
   methods: {
-    goback(){
-      if(history.length){
+    goback () {
+      if (history.length) {
         this.$router.go(-1)
       }
     },
-    goRegister(){
-      this.$router.push({name:'guestRegister'})
+    goRegister () {
+      this.$router.push({ name: 'guestRegister' })
     }
   }
 }
