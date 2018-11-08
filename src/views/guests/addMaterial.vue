@@ -1,10 +1,10 @@
 <template>
   <div id='add-material'>
-    <mt-header title="添加来访人员">
+    <mt-header title="添加携带物品" fixed>
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-      <mt-button slot="right" @click.native="confirm">添加</mt-button>
+      <mt-button slot="right" @click.native="confirm">确定</mt-button>
     </mt-header>
-    <div class="guest-form">
+    <div class="material-form">
       <mt-field label="物件名称" placeholder="请输入物件名称" v-model="material.name"></mt-field>
       <mt-field label="数量" placeholder="请输入物件数量" v-model="material.count"></mt-field>
       <mt-field label="型号" placeholder="请输入物件类型" v-model="material.type"></mt-field>
@@ -69,6 +69,9 @@ export default {
 
 <style lang="scss" scoped>
 #add-material {
+  .material-form{
+    margin-top: 40px;
+  }
   .list-header {
     margin-top: 30px;
     padding: 0 10px;

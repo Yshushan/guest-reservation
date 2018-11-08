@@ -5,7 +5,7 @@
     </mt-header>
     <div class="btnBox">
       <mt-button class="btn" type="primary" size="large" @click.native="goRegister">预约登记</mt-button>
-      <mt-button class="btn" type="primary" size="large">来访记录</mt-button>
+      <mt-button class="btn" type="primary" size="large" @click.native="goRecord">来访记录</mt-button>
     </div>
   </div>
 </template>
@@ -26,6 +26,9 @@ export default {
     },
     goRegister () {
       this.$router.push({ name: 'guestRegister' })
+    },
+    goRecord(){
+      this.$router.push({ name: 'visitRecords' })
     }
   }
 }

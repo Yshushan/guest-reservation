@@ -1,11 +1,14 @@
 <template>
   <div id='search-employee'>
-    <mt-header title="添加被访人">
+    <mt-header title="添加被访人" fixed>
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-      <mt-button slot="right" @click.native="confirm">添加</mt-button>
+      <mt-button slot="right" @click.native="confirm">确定</mt-button>
     </mt-header>
-    <mt-field label="被访人姓名" placeholder="请输入姓名" v-model="employee.name"></mt-field>
-    <mt-field label="被访人手机号" placeholder="请输入手机号" type="tel" v-model="employee.phone"></mt-field>
+    <div class="content">
+      <div class="employee-form">
+      <mt-field label="被访人姓名" placeholder="请输入姓名" v-model="employee.name"></mt-field>
+      <mt-field label="被访人手机号" placeholder="请输入手机号" type="tel" v-model="employee.phone"></mt-field>
+    </div>
     <p class="list-header">已添加人员名单</p>
     <div class="list" v-if="employeeList.length">
       <mt-cell v-for="e of employeeList" :key="e.id" :title="e.name" :label="`${e.phone} - ${e.gender}`">
@@ -13,6 +16,7 @@
       </mt-cell>
     </div>
     <p class="no-item" v-else>还没有添加信息！</p>
+    </div>
   </div>
 </template>
 
@@ -40,7 +44,7 @@ export default {
       this.$router.push({ name: 'guestRegister' })
     },
     confirm () {
-      const employee = employeeTest.find(e => {
+      const employee = employeesData.find(e => {
         return e.name === this.employee.name && e.phone === this.employee.phone
       })
       if (employee) {
@@ -68,6 +72,12 @@ export default {
 
 <style lang="scss" scoped>
   #search-employee{
+    position: relative;
+    .content{
+      position:absolute;
+      top:40px;
+      width: 100%;
+    }
     .list-header{
       margin-top: 30px;
       padding: 0 10px;

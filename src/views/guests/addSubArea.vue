@@ -1,13 +1,17 @@
 <template>
     <div id="add-sub-area">
-        <mt-header title="选择子区域">
-      <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-    </mt-header>
+      <mt-header title="选择子区域" fixed>
+        <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
+      </mt-header>
+      <div class="area-list">
         <mt-cell v-for="area of subAreas" 
-        :key="area.id" 
-        :title="area.value" 
-        :to="{name: 'guestRegister'}"
-        @click.native="updateSubArea(area)"></mt-cell>
+                :key="area.id" 
+                :title="area.value" 
+                :to="{name: 'guestRegister'}"
+                @click.native="updateSubArea(area)">
+          <i class="iconStyle fa fa-angle-right"></i>
+        </mt-cell>
+      </div>
     </div>
 </template>
 
@@ -36,4 +40,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+#add-sub-area{
+  position: relative;
+  .area-list{
+    position: absolute;
+    top: 40px;
+    width: 100%
+  }
+}
+</style>
+
 

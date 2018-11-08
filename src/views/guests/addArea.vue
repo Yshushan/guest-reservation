@@ -1,15 +1,18 @@
 <template>
     <div id="add-area">
-        <mt-header title="访客预约登记">
-      <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-    </mt-header>
+      <mt-header title="访客预约登记" fixed>
+        <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
+      </mt-header >
+      <div class="content">
         <mt-cell v-for="area of areas" 
-        :key="area.id" 
-        :title="area.value" 
-        :to="{name: 'addSubArea', params: {sub: area.id}}"
-        @click.native ="updateArea(area)" 
-        is-link>
+                :key="area.id" 
+                :title="area.value" 
+                :to="{name: 'addSubArea', params: {sub: area.id}}"
+                @click.native ="updateArea(area)" 
+                >
+                <i class="iconStyle fa fa-angle-right"></i>
         </mt-cell>
+      </div>
     </div>
 </template>
 
@@ -37,4 +40,17 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  #add-area{
+    position: relative;
+    .content{
+      position: absolute;
+      top: 40px;
+      width: 100%
+    }
+  }
+</style>
+
+
 

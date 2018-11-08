@@ -171,6 +171,48 @@ const visitTypeSlots =[{
   defaultIndex: -100
 }]
 
+const visitRecords = [
+  {
+    id:1,
+    time: '2018-09-26 10:17:42',
+    employee: '张三',
+    area: '美云之数',
+    reason: '供应商',
+    status: '申请成功'
+  },
+  {
+    id:2,
+    time: '2018-09-26 10:17:42',
+    employee: '张三',
+    area: '美云之数',
+    reason: '供应商',
+    status: '申请成功'
+  },
+  {
+    id:3,
+    time: '2018-09-26 10:17:42',
+    employee: '张三',
+    area: '美云之数',
+    reason: '供应商',
+    status: '申请成功'
+  },
+  {
+    id:4,
+    time: '2018-09-26 10:17:42',
+    employee: '张三',
+    area: '美云之数',
+    reason: '供应商',
+    status: '申请成功'
+  },
+  {
+    id:6,
+    time: '2018-09-26 10:17:42',
+    employee: '张三',
+    area: '美云之数',
+    reason: '供应商',
+    status: '申请成功'
+  },
+]
 
 
 
@@ -183,5 +225,6 @@ export {
 	certificateTypeSlots,
 	areas,
 	subAreas,
-	visitTypeSlots
+  visitTypeSlots,
+  visitRecords
 }

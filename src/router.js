@@ -56,5 +56,10 @@ export default new Router({
       name: 'addSubArea',
       component: () => import(/* webpackChunkName: "addSubArea" */ './views/guests/addSubArea.vue')
     },
+    {
+      path: '/reservation/visitRecords',
+      name: 'visitRecords',
+      component: () => import(/* webpackChunkName: "addArea" */ './views/guests/visitRecords.vue')
+    }
   ]
 })

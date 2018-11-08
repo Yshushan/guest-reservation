@@ -1,9 +1,10 @@
 <template>
   <div id='add-guest'>
-    <mt-header title="添加来访人员">
+    <mt-header title="添加来访人员" fixed>
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
       <mt-button slot="right" @click.native="confirm">添加</mt-button>
     </mt-header>
+    <div class="content">
     <div class="guest-form">
       <mt-field label="来访单位" placeholder="请输入来访单位全名" v-model="guest.address"></mt-field>
       <mt-field label="访客姓名" placeholder="请输入姓名" v-model="guest.name"></mt-field>
@@ -11,7 +12,8 @@
       <mt-field label="手机号" placeholder="请输入手机号" v-model="guest.phone"></mt-field>
       <mt-field label="证件类型" placeholder="请选择" :value="guest.certificateType" @click.native="selectCertificate" :readonly="true"></mt-field>
       <mt-field label="证件号" placeholder="请输入证件号" v-model="guest.certificateID"></mt-field>
-      <mt-field label="到访车辆" placeholder="请输入车牌号" v-model="guest.carID"></mt-field>
+      <mt-field label="到访车辆" placeholder="请输入车牌号" v-model="guest.carID">
+      </mt-field>
     </div>
     <p class="list-header">已添加人员名单</p>
     <div class="list" v-if="guestList.length">
@@ -20,6 +22,7 @@
       </mt-cell>
     </div>
 		<p class="no-item" v-else>还没有添加信息！</p>
+    </div>
 		<mt-popup v-model="popupVisible" position="bottom" class="popup">
       <mt-picker :slots="slots" value-key="label" @change="onValuesChange" :showToolbar="true" class="picker">
 				<span @click="popupVisible = false">取消</span>
@@ -106,6 +109,12 @@ export default {
 
 <style lang="scss" scoped>
 #add-guest {
+  position: relative;
+  .content{
+    position: absolute;
+    top: 40px;
+    width: 100%;
+  }
   .list-header {
     margin-top: 30px;
     padding: 0 10px;
@@ -122,7 +131,7 @@ export default {
 				height: 100%;
 				justify-content: center;
 				align-items: center;
-				padding: 0 20px;
+				padding: 0 15px;
 				color: rgb(152, 152, 252);
 				&:nth-child(2){
 					float: right

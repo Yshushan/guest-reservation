@@ -15,8 +15,20 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   height: 100%;
+  background-color: #eee;
 }
 html,body{
   height: 100%;
+}
+// .mint-field-core{
+//   text-align: center;
+// }
+.iconStyle{
+  margin-right: 5px;
+  color: rgb(92, 238, 136);
+}
+.mint-cell{
+  margin: 4px;
+  border-radius: 5px;
 }
 </style>
