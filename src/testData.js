@@ -52,7 +52,7 @@ const certificateTypeSlots = [{
   defaultIndex: -100
 }]
 
-const areas = [
+const mainAreas = [
   {
     id: 1,
     value: '美的总部大楼A区'
@@ -178,7 +178,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'success'
   },
   {
     id: 2,
@@ -186,7 +186,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'fail'
   },
   {
     id: 3,
@@ -194,7 +194,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'success'
   },
   {
     id: 4,
@@ -202,7 +202,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'fail'
   },
   {
     id: 6,
@@ -210,7 +210,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'fail'
 	},
 	{
     id: 7,
@@ -218,7 +218,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'success'
 	},
 	{
     id: 8,
@@ -226,7 +226,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'success'
 	},
 	{
     id: 9,
@@ -234,14 +234,14 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'fail'
   },{
     id: 10,
     time: '2018-09-26 10:17:42',
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'fail'
 	},
 	{
     id: 12,
@@ -249,7 +249,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'success'
   },
 	{
     id: 13,
@@ -257,7 +257,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'success'
   },
 	{
     id: 14,
@@ -265,7 +265,7 @@ const visitRecords = [
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
-    status: '申请成功'
+    status: 'fail'
   },
 	// {
   //   id: 15,
@@ -289,7 +289,7 @@ export {
   employeesData,
   genderSlots,
   certificateTypeSlots,
-  areas,
+  mainAreas,
   subAreas,
   visitTypeSlots,
   visitRecords

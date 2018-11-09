@@ -13,7 +13,7 @@
       <mt-field label="携带物品" placeholder="添加携带物品" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})">
         <i class="iconStyle fa fa-angle-right"></i>
       </mt-field>
-      <mt-field label="到访区域" placeholder="选择到访区域" :value="area" :readonly="true" @click.native="$router.push({name: 'addArea'})">
+      <mt-field label="到访区域" placeholder="选择到访区域" :value="fullArea" :readonly="true" @click.native="$router.push({name: 'addArea'})">
         <i class="iconStyle fa fa-angle-right"></i>
       </mt-field>
       <mt-field label="到访时间" placeholder="请选择到访时间" :value="visitTime | formatTime" :readonly="true"  @click.native="$refs.picker.open()">
@@ -108,12 +108,10 @@ export default {
         return ''
       }
     },
-    area () {
-      if (this.$store.state.subArea) {
-        return `${this.$store.state.area.value} - ${this.$store.state.subArea.value}`
-      } else {
-        return ''
-      }
+    fullArea () {
+      if(this.$store.state.subArea)
+        return `${this.$store.state.mainArea.value}-${this.$store.state.subArea.value}`
+      else return ''
     }
   }
 }

@@ -1,28 +1,29 @@
 <template>
   <div id="visit-records">
-    <mt-header title="来访记录" fixed>
-      <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-    </mt-header>
-    <div class="records">
-      <mt-cell v-for="record of visitRecords" :key="record.id" class="card-cell" is-link :to="{}">
+    <layout v-bind="headParams">
+      <mt-cell v-for="record of visitRecords" :key="record.id" class="card-cell" :to="{name: 'recordDetail',params:{id:record.id}}">
         <div slot="title" class="card">
-          <div class='item item1'>
+          <div class='item'>
             <span class="time">{{record.time}}</span>
-            <span>{{record.status}}</span>
+            <span :style="{color:record.status==='success'? 'green':'red', 'font-weight': 600}">
+              {{record.status}}
+            </span>
           </div>
-          <div class="item item2">被访人: {{record.employee}}</div>
-          <div class="item3">
+          <div class="item">被访人: {{record.employee}}</div>
+          <div class="item">
             <span>到访地区: {{record.area}}</span>
             <span>到访原因: {{record.reason}}</span>
           </div>
         </div>
+        <i class="iconStyle fa fa-angle-right"></i>
       </mt-cell>
-    </div>
+    </layout>
   </div>
 </template>
 
 <script>
 import { visitRecords } from '@/testData.js'
+import layout from '@/components/layout'
 export default {
   name: 'visit-records',
   data () {
@@ -30,11 +31,10 @@ export default {
       visitRecords: []
     }
   },
-  methods: {
-    goback () {
-      this.$router.push({ name: 'reservation' })
-    }
+  components:{
+    layout
   },
+  props: ['headParams'],
   mounted () {
     // fetch data
     this.visitRecords = visitRecords
@@ -44,36 +44,24 @@ export default {
 
 <style lang="scss" scoped>
 #visit-records{
-  position: relative;
-  .records{
-    position: absolute;
-    top: 40px;
-    width: 100%;
     .card-cell{
       margin: 8px;
       border-radius: 5px;
       .card{
-        display: flex;
-        flex-direction: column;
-        .item1{
+        .item{
           display: flex;
           justify-content: space-between;
-          padding: 10px 3px;
-          .time{
-            font-size: 13px;
-            color: #999
+          padding: 0 3px 13px 3px;
+          &:first-child{
+            padding: 10px 3px;
+            .time{
+              font-size: 13px;
+              color: #999;
+           }
           }
-        }
-        .item2{
-          padding: 0 3px 10px 3px;
-        }
-        .item3{
-          display: flex;
-          justify-content: space-between;
-          padding: 0 3px 10px 3px;
+
         }
       }
     }
-  }
 }
 </style>

@@ -8,8 +8,8 @@ export default new Vuex.Store({
     employeesInfo: [],
     guestsInfo: [],
     materialsInfo: [],
-    area: null,
-    subArea: null
+    subArea: null,
+    mainArea: null
   },
   mutations: {
     addEmployee (state, employee) {
@@ -30,10 +30,10 @@ export default new Vuex.Store({
     deleteMaterial (state, id) {
       state.materialsInfo = state.materialsInfo.filter(e => e.id !== id)
     },
-    updateArea (state, area) {
-      state.area = area
+    updateMainArea (state, mainArea) {
+      state.mainArea = mainArea
     },
-    updateSubArea (state, subArea) {
+    updateSubArea(state, subArea){
       state.subArea = subArea
     }
 

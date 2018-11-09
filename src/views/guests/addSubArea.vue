@@ -1,22 +1,20 @@
 <template>
     <div id="add-sub-area">
-      <mt-header title="选择子区域" fixed>
-        <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-      </mt-header>
-      <div class="area-list">
+      <layout v-bind="headParams">
         <mt-cell v-for="area of subAreas"
                 :key="area.id"
                 :title="area.value"
                 :to="{name: 'guestRegister'}"
-                @click.native="updateSubArea(area)">
+                @click.native="$store.commit('updateSubArea', area)">
           <i class="iconStyle fa fa-angle-right"></i>
         </mt-cell>
-      </div>
+      </layout>
     </div>
 </template>
 
 <script>
 import { subAreas } from '@/testData.js'
+import layout from '@/components/layout'
 export default {
   name: 'add-sub-area',
   data () {
@@ -24,30 +22,20 @@ export default {
       subAreas: []
     }
   },
-  props: ['sub'],
+  components:{
+    layout
+  },
+  props: ['headParams'],
   mounted () {
     // fetch sub-areas data
-    // fetch(url, sub).then(res=>res.json()).then(data => this.subAreas = data)
+    // fetch(url, this.mainAreaID).then(res=>res.json()).then(data => this.subAreas = data)
     this.subAreas = subAreas
   },
-  methods: {
-    goback () {
-      this.$router.push({ name: 'addArea' })
-    },
-    updateSubArea (area) {
-      this.$store.commit('updateSubArea', area)
+  computed: {
+    mainAreaID(){
+      return this.$store.state.mianArea.id
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-#add-sub-area{
-  position: relative;
-  .area-list{
-    position: absolute;
-    top: 40px;
-    width: 100%
-  }
-}
-</style>
