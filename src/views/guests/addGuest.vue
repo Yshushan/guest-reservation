@@ -52,8 +52,8 @@ export default {
         phone: '',
         gender: '',
         certificateType: '',
-				certificateID: '',
-				carID: ''
+        certificateID: '',
+        carID: ''
       },
       popupVisible: false,
       slots: [],
@@ -77,7 +77,7 @@ export default {
         if (action) {
           this.$store.commit('deleteGuest', id)
         }
-      })
+      }).catch(()=>{})
     },
     onValuesChange (picker, values) {
       this.temp = values[0] ? values[0].value : ''

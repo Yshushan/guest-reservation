@@ -32,10 +32,10 @@
       </mt-datetime-picker>
 
     <mt-popup v-model="popupVisible" position="bottom" class="popup">
-      <mt-picker :slots="slots" 
-                  value-key="label" 
-                  @change="onValuesChange" 
-                  :showToolbar="true" 
+      <mt-picker :slots="slots"
+                  value-key="label"
+                  @change="onValuesChange"
+                  :showToolbar="true"
                   class="picker">
 				  <span @click="popupVisible = false">取消</span>
 				  <span @click="visitType = temp; popupVisible=false">确定</span>
@@ -45,16 +45,16 @@
 </template>
 
 <script>
- import { Picker, Popup, DatetimePicker } from 'mint-ui'
-import {visitTypeSlots} from '@/testData.js'
+import { Picker, Popup, DatetimePicker } from 'mint-ui'
+import { visitTypeSlots } from '@/testData.js'
 export default {
-  name: "guest-register",
+  name: 'guest-register',
   components: {
     Picker,
     Popup,
     DatetimePicker
   },
-  data() {
+  data () {
     return {
       pickerValue: null,
       popupVisible: false,
@@ -62,66 +62,65 @@ export default {
       visitType: '',
       slots: [],
       temp: ''
-    };
+    }
   },
   methods: {
-    goback() {
-      this.$router.push({ name: "reservation" });
+    goback () {
+      this.$router.push({ name: 'reservation' })
     },
-    handleConfirm(value){
+    handleConfirm (value) {
       this.visitTime = value
     },
-    selectType(){
+    selectType () {
       this.popupVisible = true
       this.slots = visitTypeSlots
     },
     onValuesChange (picker, values) {
       this.temp = values[0] ? values[0].value : ''
     },
-    sumbit(){
+    sumbit () {
 
     }
   },
   computed: {
-    employees() {
+    employees () {
       if (this.$store.state.employeesInfo.length) {
         return this.$store.state.employeesInfo
           .map(employee => employee.name)
-          .join(",");
+          .join(',')
       } else {
-        return "";
+        return ''
       }
     },
-    guests() {
+    guests () {
       if (this.$store.state.guestsInfo.length) {
-        return this.$store.state.guestsInfo.map(guest => guest.name).join(",");
+        return this.$store.state.guestsInfo.map(guest => guest.name).join(',')
       } else {
-        return "";
+        return ''
       }
     },
-    materials() {
+    materials () {
       if (this.$store.state.materialsInfo.length) {
         return this.$store.state.materialsInfo
           .map(material => material.name)
-          .join(",");
+          .join(',')
       } else {
-        return "";
+        return ''
       }
     },
-    area() {
+    area () {
       if (this.$store.state.subArea) {
-        return `${this.$store.state.area.value} - ${this.$store.state.subArea.value}`;
+        return `${this.$store.state.area.value} - ${this.$store.state.subArea.value}`
       } else {
-        return "";
+        return ''
       }
-    },
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 #guest-register{
-  position: relative;
   .popup{
     width: 100%;
     .picker{
@@ -141,7 +140,7 @@ export default {
   }
   .sumbit-btn{
     position: fixed;
-    bottom: 30px !important;
+    bottom: 30px;
     width: 94%;
     margin-left: 3%;
   }

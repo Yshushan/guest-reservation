@@ -30,12 +30,12 @@ export default new Vuex.Store({
     deleteMaterial (state, id) {
       state.materialsInfo = state.materialsInfo.filter(e => e.id !== id)
     },
-    updateArea(state, area){
+    updateArea (state, area) {
       state.area = area
     },
-    updateSubArea(state, subArea){
+    updateSubArea (state, subArea) {
       state.subArea = subArea
-    },
+    }
 
   },
   actions: {

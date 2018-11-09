@@ -15,10 +15,11 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   height: 100%;
+  overflow: auto;
   background-color: #eee;
 }
 html,body{
-  height: 100%;
+  height:100%;
 }
 // .mint-field-core{
 //   text-align: center;
@@ -28,7 +29,7 @@ html,body{
   color: rgb(92, 238, 136);
 }
 .mint-cell{
-  margin: 4px;
+  margin: 6px 8px;
   border-radius: 5px;
 }
 </style>

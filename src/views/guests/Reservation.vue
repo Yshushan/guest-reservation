@@ -1,6 +1,6 @@
 <template>
   <div id="reservation">
-    <mt-header title="访客预约" fixed>
+    <mt-header title="访客预约">
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
     </mt-header>
     <div class="btnBox">
@@ -27,7 +27,7 @@ export default {
     goRegister () {
       this.$router.push({ name: 'guestRegister' })
     },
-    goRecord(){
+    goRecord () {
       this.$router.push({ name: 'visitRecords' })
     }
   }
@@ -37,16 +37,16 @@ export default {
 <style lang="scss" scoped>
 #reservation{
   height: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .btnBox{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100px;
-    width: 100%;
-    position: absolute;
-    bottom: 50px;
+    margin-bottom: 40px;
     .btn{
       width: 95%
     }

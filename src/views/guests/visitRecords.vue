@@ -4,7 +4,7 @@
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
     </mt-header>
     <div class="records">
-      <mt-cell v-for="record of visitRecords" :key="record.id" class="card-cell">
+      <mt-cell v-for="record of visitRecords" :key="record.id" class="card-cell" is-link :to="{}">
         <div slot="title" class="card">
           <div class='item item1'>
             <span class="time">{{record.time}}</span>
@@ -22,24 +22,24 @@
 </template>
 
 <script>
-import {visitRecords} from '@/testData.js'
-  export default {
-    name: 'visit-records',
-    data(){
-      return {
-        visitRecords: []
-      }
-    },
-    methods: {
-      goback() {
-      this.$router.push({ name: "reservation" });
-    }    
-    },
-    mounted(){
-      // fetch data
-      this.visitRecords = visitRecords
+import { visitRecords } from '@/testData.js'
+export default {
+  name: 'visit-records',
+  data () {
+    return {
+      visitRecords: []
     }
+  },
+  methods: {
+    goback () {
+      this.$router.push({ name: 'reservation' })
+    }
+  },
+  mounted () {
+    // fetch data
+    this.visitRecords = visitRecords
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +50,7 @@ import {visitRecords} from '@/testData.js'
     top: 40px;
     width: 100%;
     .card-cell{
-      margin: 6px;
+      margin: 8px;
       border-radius: 5px;
       .card{
         display: flex;

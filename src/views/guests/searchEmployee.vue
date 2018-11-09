@@ -6,16 +6,16 @@
     </mt-header>
     <div class="content">
       <div class="employee-form">
-      <mt-field label="被访人姓名" placeholder="请输入姓名" v-model="employee.name"></mt-field>
-      <mt-field label="被访人手机号" placeholder="请输入手机号" type="tel" v-model="employee.phone"></mt-field>
-    </div>
-    <p class="list-header">已添加人员名单</p>
-    <div class="list" v-if="employeeList.length">
-      <mt-cell v-for="e of employeeList" :key="e.id" :title="e.name" :label="`${e.phone} - ${e.gender}`">
-        <mt-button size="small" @click.native="deleteEmployee(e.id)"><i slot="icon" class="fa fa-minus-square"></i></mt-button>
-      </mt-cell>
-    </div>
-    <p class="no-item" v-else>还没有添加信息！</p>
+        <mt-field label="被访人姓名" placeholder="请输入姓名" v-model="employee.name"></mt-field>
+        <mt-field label="被访人手机号" placeholder="请输入手机号" type="tel" v-model="employee.phone"></mt-field>
+      </div>
+      <p class="list-header">已添加人员名单</p>
+      <div class="list" v-if="employeeList.length">
+        <mt-cell v-for="e of employeeList" :key="e.id" :title="e.name" :label="`${e.phone} - ${e.gender}`">
+          <mt-button size="small" @click.native="deleteEmployee(e.id)"><i slot="icon" class="fa fa-minus-square"></i></mt-button>
+        </mt-cell>
+      </div>
+      <p class="no-item" v-else>还没有添加信息！</p>
     </div>
   </div>
 </template>

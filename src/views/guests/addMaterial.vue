@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { Field, Toast, Cell, MessageBox} from 'mint-ui'
+import { Field, Toast, Cell, MessageBox } from 'mint-ui'
 export default {
   name: 'add-material',
   components: {
@@ -36,16 +36,16 @@ export default {
         count: '',
         type: '',
         remark: ''
-      },
+      }
     }
   },
   methods: {
     goback () {
-        this.$router.push({ name: 'guestRegister' })
+      this.$router.push({ name: 'guestRegister' })
     },
     confirm () {
       if (Object.values(this.material).every(value => value)) {
-        this.$store.commit('addMaterial', { ...this.material, id: Date.now()})
+        this.$store.commit('addMaterial', { ...this.material, id: Date.now() })
         this.goback()
       } else {
         Toast('请填写完整信息！')

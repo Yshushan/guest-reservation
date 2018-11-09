@@ -4,9 +4,9 @@
         <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
       </mt-header>
       <div class="area-list">
-        <mt-cell v-for="area of subAreas" 
-                :key="area.id" 
-                :title="area.value" 
+        <mt-cell v-for="area of subAreas"
+                :key="area.id"
+                :title="area.value"
                 :to="{name: 'guestRegister'}"
                 @click.native="updateSubArea(area)">
           <i class="iconStyle fa fa-angle-right"></i>
@@ -16,29 +16,29 @@
 </template>
 
 <script>
-import { subAreas } from "@/testData.js";
+import { subAreas } from '@/testData.js'
 export default {
-  name: "add-sub-area",
-  data() {
+  name: 'add-sub-area',
+  data () {
     return {
       subAreas: []
-    };
+    }
   },
-  props: ["sub"],
-  mounted() {
+  props: ['sub'],
+  mounted () {
     // fetch sub-areas data
     // fetch(url, sub).then(res=>res.json()).then(data => this.subAreas = data)
-    this.subAreas = subAreas;
+    this.subAreas = subAreas
   },
   methods: {
-    goback() {
-      this.$router.push({ name: "addArea" });
+    goback () {
+      this.$router.push({ name: 'addArea' })
     },
-    updateSubArea(area){
-        this.$store.commit('updateSubArea', area)
+    updateSubArea (area) {
+      this.$store.commit('updateSubArea', area)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -51,5 +51,3 @@ export default {
   }
 }
 </style>
-
-
