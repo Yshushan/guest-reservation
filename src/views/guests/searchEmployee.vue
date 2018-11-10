@@ -12,19 +12,10 @@
 </template>
 
 <script>
-import { Field, Toast, Cell, MessageBox, Picker, Popup } from 'mint-ui'
+import { Toast, MessageBox } from 'mint-ui'
 import { employeesData } from '@/testData.js'
-import layout from '@/components/layout'
-import addedList from '@/components/addedList'
 export default {
   name: 'search-employee',
-  components: {
-    Field,
-    Toast,
-    Cell,
-    layout,
-    addedList
-  },
   props: ['headParams'],
   data () {
     return {
@@ -44,7 +35,7 @@ export default {
         this.$store.commit('addEmployee', employee)
         this.$router.push({name: 'guestRegister'})
       } else {
-        Toast('员工不存在！')
+        Toast('请检查信息是否填写正确')
       }
     },
     deleteEmployee (employee) {

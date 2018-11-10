@@ -14,18 +14,11 @@
 </template>
 
 <script>
-import { Field, Toast, Cell, MessageBox } from "mint-ui";
-import layout from '@/components/layout'
-import addedList from '@/components/addedList'
+import { Toast, MessageBox } from "mint-ui";
+// import layout from '@/components/layout'
+// import addedList from '@/components/addedList'
 export default {
   name: "add-material",
-  components: {
-    Field,
-    Toast,
-    Cell,
-    layout,
-    addedList
-  },
   props: ['headParams'],
   data() {
     return {

@@ -24,10 +24,10 @@ html,body{
 // .mint-field-core{
 //   text-align: center;
 // }
-.iconStyle{
-  margin-right: 5px;
-  color: rgb(92, 238, 136);
-}
+// .iconStyle{
+//   margin-right: 5px;
+//   color: rgb(92, 238, 136);
+// }
 .mint-cell{
   margin: 6px 8px;
   border-radius: 5px;

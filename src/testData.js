@@ -1,3 +1,41 @@
+const genderDict = [
+  {
+    name: '女',
+    value: 'female'
+  },
+  {
+    name: '男',
+    value: 'male'
+  }
+]
+
+const certificateTypeDict = [
+  {
+    name: '身份证',
+    value: 'IDCard'
+  },
+  {
+    name: '护照',
+    value: 'passport'
+  },
+  {
+    name: '港澳台居住证',
+    value: 'HMTCard'
+  }
+]
+
+const visitTypeDict = [
+  {
+    name: '供应商',
+    value: 'vendor'
+  },
+  {
+    name: '采购商',
+    value: 'buyer'
+  }
+]
+
+
 const employeesData = [{
   id: 1,
   name: '张三',
@@ -41,11 +79,8 @@ const certificateTypeSlots = [{
     label: '护照',
     value: 'passport'
   }, {
-    label: '港澳通行证',
-    value: 'HongKong'
-  }, {
-    label: '台湾居民证',
-    value: 'TaiWan'
+    label: '港澳台居住证',
+    value: 'HMTCard'
   }],
   className: 'slot1',
   textAlign: 'center',
@@ -146,24 +181,12 @@ const visitTypeSlots = [{
   flex: 1,
   values: [
     {
-      label: '类型1',
-      value: 'class1'
+      label: '供应商',
+      value: 'vendor'
     },
     {
-      label: '类型2',
-      value: 'class2'
-    },
-    {
-      label: '类型3',
-      value: 'class3'
-    },
-    {
-      label: '类型4',
-      value: 'class4'
-    },
-    {
-      label: '类型5',
-      value: 'class5'
+      label: '采购商',
+      value: 'buyer'
     }
   ],
   className: 'slot1',
@@ -292,5 +315,8 @@ export {
   mainAreas,
   subAreas,
   visitTypeSlots,
-  visitRecords
+  visitRecords,
+  genderDict,
+  certificateTypeDict,
+  visitTypeDict,
 }

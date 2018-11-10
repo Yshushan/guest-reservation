@@ -5,9 +5,9 @@
       <div class="guest-form">
         <mt-field label="来访单位" placeholder="请输入来访单位全名" v-model="guest.address"></mt-field>
         <mt-field label="访客姓名" placeholder="请输入姓名" v-model="guest.name"></mt-field>
-        <mt-field label="性别" placeholder="请选择" :value="guest.gender" @click.native="selectGender" :readonly="true"></mt-field>
+        <mt-field label="性别" placeholder="请选择" :value="guest.gender | dictTransform('gender')" @click.native="selectGender" :readonly="true"></mt-field>
         <mt-field label="手机号" placeholder="请输入手机号" v-model="guest.phone"></mt-field>
-        <mt-field label="证件类型" placeholder="请选择" :value="guest.certificateType" @click.native="selectCertificate" :readonly="true"></mt-field>
+        <mt-field label="证件类型" placeholder="请选择" :value="guest.certificateType | dictTransform('certificate')" @click.native="selectCertificate" :readonly="true"></mt-field>
         <mt-field label="证件号" placeholder="请输入证件号" v-model="guest.certificateID"></mt-field>
         <mt-field label="到访车辆" placeholder="请输入车牌号" v-model="guest.carID">
         </mt-field>
@@ -24,21 +24,10 @@
 </template>
 
 <script>
-import { Field, Toast, Cell, MessageBox, Picker, Popup } from "mint-ui";
-import { genderSlots, certificateTypeSlots } from "@/testData.js";
-import layout from "@/components/layout";
-import addedList from '@/components/addedList'
+import { Toast, MessageBox } from "mint-ui";
+import { genderSlots, certificateTypeSlots, genderDict, certificateTypeDict } from "@/testData.js";
 export default {
   name: "add-guest",
-  components: {
-    Field,
-    Toast,
-    Cell,
-    Popup,
-    Picker,
-    layout,
-    addedList
-  },
   props: ["headParams"],
   data() {
     return {
@@ -57,13 +46,10 @@ export default {
     };
   },
   methods: {
-    goback() {
-      this.$router.push({ name: "guestRegister" });
-    },
     confirm() {
       if (Object.values(this.guest).every(value => value)) {
         this.$store.commit("addGuest", { ...this.guest, id: Date.now() });
-        this.goback();
+        this.$router.push({ name: "guestRegister" });
       } else {
         Toast("请填写完整信息！");
       }
@@ -100,6 +86,16 @@ export default {
   computed: {
     guestList() {
       return this.$store.state.guestsInfo;
+    }
+  },
+  filters: {
+    dictTransform(value, type){
+      if(!value) return ''
+      if(type === 'gender'){
+        return genderDict.find(item => item.value === value).name
+      }else if(type === 'certificate'){
+        return certificateTypeDict.find(item => item.value === value).name
+      }
     }
   }
 };

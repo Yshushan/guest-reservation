@@ -97,9 +97,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "addArea" */ './views/guests/visitRecords.vue')
     },
     {
-      path: '/reservation/visitRecords/recordDetail/:id',
+      path: '/reservation/visitRecords/recordDetail/',
       name: 'recordDetail',
-      props: true,
+      props:{
+        headParams:{
+          title: '到访详情',
+          back: 'visitRecords'
+        }
+      },
       component: () => import(/* webpackChunkName: "addArea" */ './views/guests/recordDetail.vue')
     }
   ]

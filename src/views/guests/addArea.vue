@@ -6,7 +6,7 @@
                 :title="area.value"
                 :to="{name: 'addSubArea'}"
                 @click.native="$store.commit('updateMainArea', area)">
-                <i class="iconStyle fa fa-angle-right"></i>
+                <i class="fa fa-angle-right"></i>
         </mt-cell>
       </layout>
     </div>
@@ -14,12 +14,8 @@
 
 <script>
 import { mainAreas } from '@/testData.js'
-import layout from '@/components/layout'
 export default {
   name: 'add-area',
-  components:{
-    layout
-  },
   props:['headParams'],
   data () {
     return {
@@ -34,6 +30,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>

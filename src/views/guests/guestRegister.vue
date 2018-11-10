@@ -5,22 +5,22 @@
     </mt-header>
     <div class="register-form">
       <mt-field label="被访员工" placeholder="添加被访人" :value="employees" :readonly="true" @click.native="$router.push({name:'searchEmployee'})">
-        <i class="iconStyle fa fa-angle-right"></i>
+        <i class="fa fa-angle-right"></i>
       </mt-field>
       <mt-field label="来访人员" placeholder="添加来访人员" :value="guests" :readonly="true" @click.native="$router.push({name: 'addGuest'})">
-        <i class="iconStyle fa fa-angle-right"></i>
+        <i class="fa fa-angle-right"></i>
       </mt-field>
       <mt-field label="携带物品" placeholder="添加携带物品" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})">
-        <i class="iconStyle fa fa-angle-right"></i>
+        <i class="fa fa-angle-right"></i>
       </mt-field>
       <mt-field label="到访区域" placeholder="选择到访区域" :value="fullArea" :readonly="true" @click.native="$router.push({name: 'addArea'})">
-        <i class="iconStyle fa fa-angle-right"></i>
+        <i class="fa fa-angle-right"></i>
       </mt-field>
       <mt-field label="到访时间" placeholder="请选择到访时间" :value="visitTime | formatTime" :readonly="true"  @click.native="$refs.picker.open()">
-        <i class="iconStyle fa fa-angle-right"></i>
+        <i class="fa fa-angle-right"></i>
       </mt-field>
-      <mt-field label="到访类型" placeholder="请选择" :value="visitType" :readonly="true" @click.native="selectType">
-        <i class="iconStyle fa fa-angle-right"></i>
+      <mt-field label="到访类型" placeholder="请选择" :value="visitType | dictTransform('visit')" :readonly="true" @click.native="selectType">
+        <i class="fa fa-angle-right"></i>
       </mt-field>
     </div>
     <mt-button class="sumbit-btn" type="primary" size="large" @click.native="sumbit">提交</mt-button>
@@ -45,15 +45,9 @@
 </template>
 
 <script>
-import { Picker, Popup, DatetimePicker } from 'mint-ui'
-import { visitTypeSlots } from '@/testData.js'
+import { visitTypeSlots, visitTypeDict } from '@/testData.js'
 export default {
   name: 'guest-register',
-  components: {
-    Picker,
-    Popup,
-    DatetimePicker
-  },
   data () {
     return {
       pickerValue: null,
@@ -84,34 +78,26 @@ export default {
   },
   computed: {
     employees () {
-      if (this.$store.state.employeesInfo.length) {
-        return this.$store.state.employeesInfo
-          .map(employee => employee.name)
-          .join(',')
-      } else {
-        return ''
-      }
+        return this.$store.state.employeesInfo.map(employee => employee.name).join(',')
     },
     guests () {
-      if (this.$store.state.guestsInfo.length) {
         return this.$store.state.guestsInfo.map(guest => guest.name).join(',')
-      } else {
-        return ''
-      }
     },
     materials () {
-      if (this.$store.state.materialsInfo.length) {
-        return this.$store.state.materialsInfo
-          .map(material => material.name)
-          .join(',')
-      } else {
-        return ''
-      }
+        return this.$store.state.materialsInfo.map(material => material.name).join(',')
     },
     fullArea () {
       if(this.$store.state.subArea)
         return `${this.$store.state.mainArea.value}-${this.$store.state.subArea.value}`
       else return ''
+    }
+  },
+  filters: {
+    dictTransform(value, type){
+      if(!value) return
+      if(type === "visit"){
+        return visitTypeDict.find(item => item.value === value).name
+      }
     }
   }
 }

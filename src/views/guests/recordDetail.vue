@@ -1,9 +1,6 @@
 <template>
   <div id="record-detail">
-    <mt-header title="来访记录" fixed>
-    	<mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-    </mt-header>
-    <div class="content">
+    <layout v-bind="headParams">
       <mt-cell title="状态" value=""></mt-cell>
 		  <fd-card :guest="guest"></fd-card>
 		  <fd-card :guest="guest"></fd-card>
@@ -11,7 +8,7 @@
 		  <fd-card :guest="guest"></fd-card>
 		  <fd-card :guest="guest"></fd-card>
 		  <fd-card :guest="guest"></fd-card>
-    </div>
+    </layout>
     </div>
 </template>
 
@@ -22,7 +19,7 @@ export default {
   components:{
     fdCard,
   },
-  props:['id'],
+  props:['headParams'],
   data(){
     return {
       guest:{
@@ -39,22 +36,9 @@ export default {
         submitTime: '2018'
       }
     }
-  },
-  methods:{
-    goback () {
-      this.$router.push({ name: 'visitRecords'})
-    }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-#record-detail{
-  position: relative;
-  .content{
-    position: absolute;
-    top: 40px;
-    width: 100%;
-  }
-}
-</style>
+
+

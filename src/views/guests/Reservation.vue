@@ -11,13 +11,8 @@
 </template>
 
 <script>
-import { Header, Button } from 'mint-ui'
 export default {
   name: 'reservation',
-  components: {
-    Header,
-    Button
-  },
   methods: {
     goback () {
       if (history.length) {

@@ -23,16 +23,12 @@
 
 <script>
 import { visitRecords } from '@/testData.js'
-import layout from '@/components/layout'
 export default {
   name: 'visit-records',
   data () {
     return {
       visitRecords: []
     }
-  },
-  components:{
-    layout
   },
   props: ['headParams'],
   mounted () {

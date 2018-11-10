@@ -3,8 +3,8 @@
         <div class="card-head flex-box" @click="isFold = !isFold" > 
             <span>{{guest.name}}</span>
             <span>
-                <i class="iconStyle fa fa-angle-right" v-show="isFold"></i>
-                <i class="iconStyle fa fa-angle-down" v-show="!isFold"></i>
+                <i class="fa fa-angle-right" v-show="isFold"></i>
+                <i class="fa fa-angle-down" v-show="!isFold"></i>
             </span>
         </div>
         <div class="card-content" v-show="!isFold">
@@ -48,7 +48,6 @@ export default {
         padding: 0 15px;
     }
 }
-
 </style>
 
 

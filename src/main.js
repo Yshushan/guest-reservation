@@ -4,6 +4,12 @@ import router from './router'
 import store from './store'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import layout from '@/components/layout'
+import addedList from '@/components/addedList'
+
+Vue.component(layout.name, layout)
+Vue.component(addedList.name, addedList)
+
 
 Vue.use(MintUI)
 

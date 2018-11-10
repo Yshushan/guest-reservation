@@ -14,7 +14,6 @@
 
 <script>
 import { subAreas } from '@/testData.js'
-import layout from '@/components/layout'
 export default {
   name: 'add-sub-area',
   data () {
@@ -22,13 +21,11 @@ export default {
       subAreas: []
     }
   },
-  components:{
-    layout
-  },
   props: ['headParams'],
-  mounted () {
+  created () {
     // fetch sub-areas data
     // fetch(url, this.mainAreaID).then(res=>res.json()).then(data => this.subAreas = data)
+    // 模拟测试
     this.subAreas = subAreas
   },
   computed: {
