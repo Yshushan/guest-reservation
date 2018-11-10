@@ -21,15 +21,9 @@
 html,body{
   height:100%;
 }
-// .mint-field-core{
-//   text-align: center;
+
+// .mint-cell{
+//   margin: 6px 8px;
+//   border-radius: 5px;
 // }
-// .iconStyle{
-//   margin-right: 5px;
-//   color: rgb(92, 238, 136);
-// }
-.mint-cell{
-  margin: 6px 8px;
-  border-radius: 5px;
-}
 </style>

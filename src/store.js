@@ -36,7 +36,6 @@ export default new Vuex.Store({
     updateSubArea(state, subArea){
       state.subArea = subArea
     }
-
   },
   actions: {
 

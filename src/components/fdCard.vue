@@ -32,20 +32,23 @@ export default {
 
 <style lang="scss" scoped>
 #fd-card{
-    box-sizing: border-box;
     .flex-box{
         display: flex;
         justify-content: space-between;
-        padding: 5px 0;
     }
     .card-head{
+        box-sizing: border-box;
         padding: 12px 10px;
         background-color: #fff;
+        min-height: 48px;
     }
     .card-content{
         overflow: hidden;
         background-color: #eee;
-        padding: 0 15px;
+        padding: 5px 15px;
+        div{
+          padding: 5px 0;
+        }
     }
 }
 </style>

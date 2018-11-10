@@ -1,7 +1,8 @@
 <template>
     <div id="add-sub-area">
-      <layout v-bind="headParams">
-        <mt-cell v-for="area of subAreas"
+      <layout title="选择到访区域" back="addArea">
+        <mt-cell style="margin:6px; border-radius:5px;" 
+                v-for="area of subAreas"
                 :key="area.id"
                 :title="area.value"
                 :to="{name: 'guestRegister'}"
@@ -21,17 +22,12 @@ export default {
       subAreas: []
     }
   },
-  props: ['headParams'],
+  props: ['areaId'],
   created () {
     // fetch sub-areas data
-    // fetch(url, this.mainAreaID).then(res=>res.json()).then(data => this.subAreas = data)
+    // fetch(url, this.areaId).then(res=>res.json()).then(data => this.subAreas = data)
     // 模拟测试
     this.subAreas = subAreas
-  },
-  computed: {
-    mainAreaID(){
-      return this.$store.state.mianArea.id
-    }
   }
 }
 </script>

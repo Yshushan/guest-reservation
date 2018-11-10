@@ -1,10 +1,11 @@
 <template>
     <div id="add-area">
       <layout v-bind="headParams">
-        <mt-cell v-for="area of mainAreas"
+        <mt-cell style="margin:6px; border-radius:5px;" 
+                v-for="area of mainAreas"
                 :key="area.id"
                 :title="area.value"
-                :to="{name: 'addSubArea'}"
+                :to="{name: 'addSubArea', params:{areaId: area.id}}"
                 @click.native="$store.commit('updateMainArea', area)">
                 <i class="fa fa-angle-right"></i>
         </mt-cell>

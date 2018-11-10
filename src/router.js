@@ -75,13 +75,8 @@ export default new Router({
       component: () => import(/* webpackChunkName: "addArea" */ './views/guests/addArea.vue')
     },
     {
-      path: '/reservation/guestRegister/addArea/addSubArea',
-      props: {
-        headParams:{
-          title: '选择到访区域',
-          back: 'addArea'
-        }
-      },
+      path: '/reservation/guestRegister/addArea/:areaId',
+      props: true,
       name: 'addSubArea',
       component: () => import(/* webpackChunkName: "addSubArea" */ './views/guests/addSubArea.vue')
     },
@@ -97,14 +92,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "addArea" */ './views/guests/visitRecords.vue')
     },
     {
-      path: '/reservation/visitRecords/recordDetail/',
+      path: '/reservation/visitRecords/:recordId',
       name: 'recordDetail',
-      props:{
-        headParams:{
-          title: '到访详情',
-          back: 'visitRecords'
-        }
-      },
+      props: true,
       component: () => import(/* webpackChunkName: "addArea" */ './views/guests/recordDetail.vue')
     }
   ]

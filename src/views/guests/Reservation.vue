@@ -4,8 +4,8 @@
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
     </mt-header>
     <div class="btnBox">
-      <mt-button class="btn" type="primary" size="large" @click.native="goRegister">预约登记</mt-button>
-      <mt-button class="btn" type="primary" size="large" @click.native="goRecord">来访记录</mt-button>
+      <mt-button class="btn" type="primary" size="large" @click.native="$router.push({ name: 'guestRegister' })">预约登记</mt-button>
+      <mt-button class="btn" type="primary" size="large" @click.native="$router.push({ name: 'visitRecords' })">来访记录</mt-button>
     </div>
   </div>
 </template>
@@ -18,12 +18,6 @@ export default {
       if (history.length) {
         this.$router.go(-1)
       }
-    },
-    goRegister () {
-      this.$router.push({ name: 'guestRegister' })
-    },
-    goRecord () {
-      this.$router.push({ name: 'visitRecords' })
     }
   }
 }
@@ -43,7 +37,7 @@ export default {
     height: 100px;
     margin-bottom: 40px;
     .btn{
-      width: 95%
+      width: 95%;
     }
   }
 }

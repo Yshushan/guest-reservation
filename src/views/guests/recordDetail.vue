@@ -1,6 +1,6 @@
 <template>
   <div id="record-detail">
-    <layout v-bind="headParams">
+    <layout title="到访详情" back="visitRecords">
       <mt-cell title="状态" value=""></mt-cell>
 		  <fd-card :guest="guest"></fd-card>
 		  <fd-card :guest="guest"></fd-card>
@@ -19,7 +19,7 @@ export default {
   components:{
     fdCard,
   },
-  props:['headParams'],
+  props:['recordId'],
   data(){
     return {
       guest:{
@@ -36,6 +36,10 @@ export default {
         submitTime: '2018'
       }
     }
+  },
+  created(){
+    // fetch data
+    
   }
 };
 </script>

@@ -1,7 +1,10 @@
 <template>
   <div id="visit-records">
     <layout v-bind="headParams">
-      <mt-cell v-for="record of visitRecords" :key="record.id" class="card-cell" :to="{name: 'recordDetail',params:{id:record.id}}">
+      <mt-cell v-for="record of visitRecords" 
+              :key="record.id" 
+              class="card-cell" 
+              :to="{name: 'recordDetail', params:{recordId: record.id}}">
         <div slot="title" class="card">
           <div class='item'>
             <span class="time">{{record.time}}</span>
@@ -31,7 +34,7 @@ export default {
     }
   },
   props: ['headParams'],
-  mounted () {
+  created () {
     // fetch data
     this.visitRecords = visitRecords
   }
@@ -55,7 +58,6 @@ export default {
               color: #999;
            }
           }
-
         }
       }
     }
