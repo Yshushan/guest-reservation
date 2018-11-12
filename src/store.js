@@ -5,37 +5,45 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    employeesInfo: [],
-    guestsInfo: [],
-    materialsInfo: [],
+    employee: {
+      userName: '',
+      userId: null
+    },
+    guests: [],
+    materials: [],
+    cars: [],
     subArea: null,
     mainArea: null
   },
   mutations: {
     addEmployee (state, employee) {
-      state.employeesInfo.push(employee)
+      state.employee = employee
     },
     addGuest (state, guest) {
-      state.guestsInfo.push(guest)
+      state.guests.push(guest)
     },
     addMaterial (state, material) {
-      state.materialsInfo.push(material)
+      state.materials.push(material)
     },
-    deleteEmployee (state, id) {
-      state.employeesInfo = state.employeesInfo.filter(e => e.id !== id)
+    addCar (state, car) {
+      state.cars.push(car)
     },
-    deleteGuest (state, id) {
-      state.guestsInfo = state.guestsInfo.filter(e => e.id !== id)
+    deleteCar (state, car) {
+      state.cars = state.cars.filter(c => c !== car)
     },
-    deleteMaterial (state, id) {
-      state.materialsInfo = state.materialsInfo.filter(e => e.id !== id)
+    deleteGuest (state, phone) {
+      state.guests = state.guests.filter(g => g.guestTelphone !== phone)
+    },
+    deleteMaterial (state, name) {
+      state.materials = state.materials.filter(m => m.name !== name)
     },
     updateMainArea (state, mainArea) {
       state.mainArea = mainArea
     },
-    updateSubArea(state, subArea){
+    updateSubArea (state, subArea) {
       state.subArea = subArea
     }
+
   },
   actions: {
 

@@ -1,14 +1,14 @@
 <template>
   <div id="visit-records">
-    <layout v-bind="headParams">
-      <mt-cell v-for="record of visitRecords" 
-              :key="record.id" 
-              class="card-cell" 
+    <layout title="到访记录" back="reservation">
+      <mt-cell v-for="record of visitRecords"
+              :key="record.id"
+              class="card-cell"
               :to="{name: 'recordDetail', params:{recordId: record.id}}">
         <div slot="title" class="card">
           <div class='item'>
             <span class="time">{{record.time}}</span>
-            <span :style="{color:record.status==='success'? 'green':'red', 'font-weight': 600}">
+            <span :style="{ color: record.status === 'success' ? 'green' : 'red', 'font-weight': 600 }">
               {{record.status}}
             </span>
           </div>
@@ -18,7 +18,7 @@
             <span>到访原因: {{record.reason}}</span>
           </div>
         </div>
-        <i class="iconStyle fa fa-angle-right"></i>
+        <i class="fa fa-angle-right"></i>
       </mt-cell>
     </layout>
   </div>
@@ -33,7 +33,6 @@ export default {
       visitRecords: []
     }
   },
-  props: ['headParams'],
   created () {
     // fetch data
     this.visitRecords = visitRecords

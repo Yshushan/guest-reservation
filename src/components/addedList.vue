@@ -1,57 +1,57 @@
 <template>
     <div id="added-list">
         <div class="list-head">
-            已添加信息列表
+            <slot></slot>
         </div>
         <div class="list-content" v-if="lists.length">
-            <div v-for="item of lists" :key="item.id">
-                <span>{{item.name}}</span>
-                <span>{{item.phone || item.type}}</span>
-                <span @click="$emit('delete', item)"><i class="fa fa-minus"></i></span>
+            <div v-for="(item,key) of lists" :key="key">
+                <span>{{item.userName || item.guestName || item.name || item}}</span>
+                <span>{{item.userPhone || item.guestTelphone ||item.count || ''}}</span>
+                <span v-if="item.userName" @click="$emit('add', item)"><i class="fa fa-plus"></i></span>
+                <span v-else  @click="$emit('delete', item)"><i class="fa fa-minus"></i></span>
             </div>
         </div>
         <div class="empty" v-else>
-            暂无任何信息！
+            无！
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'added-list',
-    props: {
-        lists: Array
-    }
+  name: 'added-list',
+  props: {
+    lists: Array
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 #added-list{
-    padding: 30px 10px; 
+    margin-top: 40px;
     .list-head{
-        padding-bottom: 15px;
+        padding-bottom: 10px;
+        padding-left: 15px;
         color: rgb(142, 175, 236);
         font-weight: 600;
     }
     .list-content {
-        background-color: rgb(178, 206, 245);
-        border-radius: 5px;
+
         color: rgb(32, 13, 13);
         div{
-            &:first-child{
-                padding: 20px 10px;
-            }
-            padding: 0 10px 20px 10px;
+            background-color: rgb(178, 206, 245);
+            padding: 15px 15px;
+            margin: 7px;
+            border-radius: 5px;
             display: grid;
             grid-template-columns: 2fr 4fr 1fr;
             span:last-child{
-                padding-right: 5px;
                 text-align: right;
             }
         }
     }
     .empty{
-        padding: 10px 30px;
+        padding: 10px 25px;
         color: red;
     }
 }

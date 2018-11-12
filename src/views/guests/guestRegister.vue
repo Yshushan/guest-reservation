@@ -4,10 +4,10 @@
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
     </mt-header>
     <div class="register-form">
-      <mt-field label="被访员工" placeholder="添加被访人" :value="employees" :readonly="true" @click.native="$router.push({name:'searchEmployee'})">
+      <mt-field label="被访员工" placeholder="添加被访人" :value="employee.userName" :readonly="true" @click.native="$router.push({name:'searchEmployee'})">
         <i class="fa fa-angle-right"></i>
       </mt-field>
-      <mt-field label="来访人员" placeholder="添加来访人员" :value="guests" :readonly="true" @click.native="$router.push({name: 'addGuest'})">
+      <mt-field label="来访人员" placeholder="添加来访人员" :value="guestsName" :readonly="true" @click.native="$router.push({name: 'addGuest'})">
         <i class="fa fa-angle-right"></i>
       </mt-field>
       <mt-field label="携带物品" placeholder="添加携带物品" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})">
@@ -16,7 +16,10 @@
       <mt-field label="到访区域" placeholder="选择到访区域" :value="fullArea" :readonly="true" @click.native="$router.push({name: 'addArea'})">
         <i class="fa fa-angle-right"></i>
       </mt-field>
-      <mt-field label="到访时间" placeholder="请选择到访时间" :value="visitTime | formatTime" :readonly="true"  @click.native="$refs.picker.open()">
+      <mt-field label="到访车辆" placeholder="添加到访车辆" :value="cars" :readonly="true" @click.native="$router.push({name: 'addCar'})">
+        <i class="fa fa-angle-right"></i>
+      </mt-field>
+      <mt-field label="到访时间" placeholder="请选择到访时间" :value="visitDate | formatTime" :readonly="true"  @click.native="$refs.picker.open()">
         <i class="fa fa-angle-right"></i>
       </mt-field>
       <mt-field label="到访类型" placeholder="请选择" :value="visitType | dictTransform('visit')" :readonly="true" @click.native="selectType">
@@ -52,7 +55,7 @@ export default {
     return {
       pickerValue: null,
       popupVisible: false,
-      visitTime: '',
+      visitDate: null,
       visitType: '',
       slots: [],
       temp: ''
@@ -63,7 +66,7 @@ export default {
       this.$router.push({ name: 'reservation' })
     },
     handleConfirm (value) {
-      this.visitTime = value
+      this.visitDate = value
     },
     selectType () {
       this.popupVisible = true
@@ -73,29 +76,38 @@ export default {
       this.temp = values[0] ? values[0].value : ''
     },
     sumbit () {
+      const registerData = {}
+      registerData.userId = this.employee.userId
+      registerData.guestBelongs = this.$store.state.materials.map(m => Object.values(m).join('&')).join('$')
+      registerData.visitCarNumber = this.cars,
+      registerData.visitArea = this.fullArea.split('-')[1]
+      registerData.visitType = this.visitType
+      registerData.visitDate = this.visitDate
 
+      const guests = this.$store.state.guests
     }
   },
   computed: {
-    employees () {
-        return this.$store.state.employeesInfo.map(employee => employee.name).join(',')
+    employee () {
+      return this.$store.state.employee
     },
-    guests () {
-        return this.$store.state.guestsInfo.map(guest => guest.name).join(',')
+    guestsName () {
+      return this.$store.state.guests.map(guest => guest.guestName).join(',')
     },
     materials () {
-        return this.$store.state.materialsInfo.map(material => material.name).join(',')
+      return this.$store.state.materials.map(material => material.name).join(',')
     },
     fullArea () {
-      if(this.$store.state.subArea)
-        return `${this.$store.state.mainArea.value}-${this.$store.state.subArea.value}`
-      else return ''
+      if (this.$store.state.subArea) { return `${this.$store.state.mainArea.nodeName}-${this.$store.state.subArea.organizationName}` } else return ''
+    },
+    cars () {
+      return this.$store.state.cars.join(',')
     }
   },
   filters: {
-    dictTransform(value, type){
-      if(!value) return
-      if(type === "visit"){
+    dictTransform (value, type) {
+      if (!value) return
+      if (type === 'visit') {
         return visitTypeDict.find(item => item.value === value).name
       }
     }

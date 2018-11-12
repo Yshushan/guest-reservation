@@ -35,23 +35,22 @@ const visitTypeDict = [
   }
 ]
 
-
-const employeesData = [{
-  id: 1,
-  name: '张三',
-  phone: '123456',
+const historyData = [{
+  userId: 1,
+  userName: '张三',
+  userPhone: '13106593117',
   gender: '男'
 },
 {
-  id: 2,
-  name: '李四',
-  phone: '123456',
+  userId: 2,
+  userName: '李四',
+  userPhone: '15922753198',
   gender: '男'
 },
 {
-  id: 3,
-  name: '王五',
-  phone: '123456',
+  userId: 3,
+  userName: '王五',
+  userPhone: '13587998899',
   gender: '女'
 }
 ]
@@ -89,91 +88,67 @@ const certificateTypeSlots = [{
 
 const mainAreas = [
   {
-    id: 1,
-    value: '美的总部大楼A区'
+    realId: 1,
+    nodeName: '美的总部大楼A区'
   },
   {
-    id: 2,
-    value: '美的总部大楼B区'
+    realId: 2,
+    nodeName: '美的总部大楼B区'
   },
   {
-    id: 3,
-    value: '美的总部大楼C区'
+    realId: 3,
+    nodeName: '美的总部大楼C区'
   },
   {
-    id: 4,
-    value: '美的总部大楼D区2341234123'
+    realId: 4,
+    nodeName: '美的总部大楼D区2341234123'
   },
   {
-    id: 5,
-    value: '美的总部大楼E区1234123412341'
+    realId: 5,
+    nodeName: '美的总部大楼E区1234123412341'
   },
   {
-    id: 6,
-    value: '美的总部大楼A区'
+    realId: 6,
+    nodeName: '美的总部大楼A区'
   },
   {
-    id: 7,
-    value: '美的总部大楼A区TQWER'
+    realId: 7,
+    nodeName: '美的总部大楼A区TQWER'
   },
   {
-    id: 8,
-    value: '美的总部大楼A区'
+    realId: 8,
+    nodeName: '美的总部大楼A区'
   },
   {
-    id: 9,
-    value: '美的总部大楼A区ERSA'
+    realId: 9,
+    nodeName: '美的总部大楼A区ERSA'
   },
   {
-    id: 10,
-    value: '美的总部大楼A区FASDF'
+    realId: 10,
+    nodeName: '美的总部大楼A区FASDF'
   },
   {
-    id: 11,
-    value: '美的总部大楼A区QWERQ'
+    realId: 11,
+    nodeName: '美的总部大楼A区QWERQ'
   },
   {
-    id: 12,
-    value: '美的总部大楼A区'
+    realId: 12,
+    nodeName: '美的总部大楼A区'
   },
   {
-    id: 13,
-    value: '美的总部大楼A区RQWER'
-  },
-  {
-    id: 14,
-    value: '美的总部大楼A区'
-  },
-  {
-    id: 15,
-    value: '美的总部大楼A区RQWER'
-  },
-  {
-    id: 16,
-    value: '美的总部大楼A区RQWER'
-  },
-  {
-    id: 17,
-    value: '美的总部大楼A区'
-  },
-  {
-    id: 18,
-    value: '美的总部大楼A区'
-  },
-  {
-    id: 19,
-    value: '美的总部大楼A区'
-  },
-  {
-    id: 20,
-    value: '美的总部大楼A区'
+    realId: 13,
+    nodeName: '美的总部大楼A区RQWER'
   }
 ]
 
 const subAreas = [
   {
-    id: 1,
-    value: '美云智数'
+    organizationId: 1,
+    organizationName: '美云智数'
+  },
+  {
+    organizationId: 2,
+    organizationName: '智造云'
   }
 ]
 
@@ -234,39 +209,39 @@ const visitRecords = [
     area: '美云之数',
     reason: '供应商',
     status: 'fail'
-	},
-	{
+  },
+  {
     id: 7,
     time: '2018-09-26 10:17:42',
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
     status: 'success'
-	},
-	{
+  },
+  {
     id: 8,
     time: '2018-09-26 10:17:42',
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
     status: 'success'
-	},
-	{
+  },
+  {
     id: 9,
     time: '2018-09-26 10:17:42',
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
     status: 'fail'
-  },{
+  }, {
     id: 10,
     time: '2018-09-26 10:17:42',
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
     status: 'fail'
-	},
-	{
+  },
+  {
     id: 12,
     time: '2018-09-26 10:17:42',
     employee: '张三',
@@ -274,7 +249,7 @@ const visitRecords = [
     reason: '供应商',
     status: 'success'
   },
-	{
+  {
     id: 13,
     time: '2018-09-26 10:17:42',
     employee: '张三',
@@ -282,34 +257,18 @@ const visitRecords = [
     reason: '供应商',
     status: 'success'
   },
-	{
+  {
     id: 14,
     time: '2018-09-26 10:17:42',
     employee: '张三',
     area: '美云之数',
     reason: '供应商',
     status: 'fail'
-  },
-	// {
-  //   id: 15,
-  //   time: '2018-09-26 10:17:42',
-  //   employee: '张三',
-  //   area: '美云之数',
-  //   reason: '供应商',
-  //   status: '申请成功'
-  // },
-	// {
-  //   id: 16,
-  //   time: '2018-09-26 10:17:42',
-  //   employee: '张三',
-  //   area: '美云之数',
-  //   reason: '供应商',
-  //   status: '申请成功'
-  // },
+  }
 ]
 
 export {
-  employeesData,
+  historyData,
   genderSlots,
   certificateTypeSlots,
   mainAreas,
@@ -318,5 +277,5 @@ export {
   visitRecords,
   genderDict,
   certificateTypeDict,
-  visitTypeDict,
+  visitTypeDict
 }

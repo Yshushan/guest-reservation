@@ -12,13 +12,13 @@
 
 <script>
 export default {
-    name: 'layout',
-    props:['title', 'back'],
-    methods:{
-        goback(){
-            this.$router.push({name: this.back})
-        }
+  name: 'layout',
+  props: ['title', 'back'],
+  methods: {
+    goback () {
+      this.$router.push({ name: this.back })
     }
+  }
 }
 </script>
 
@@ -32,5 +32,3 @@ export default {
     }
 }
 </style>
-
-

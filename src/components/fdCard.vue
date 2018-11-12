@@ -1,6 +1,6 @@
 <template>
     <div id="fd-card">
-        <div class="card-head flex-box" @click="isFold = !isFold" > 
+        <div class="card-head flex-box" @click="isFold = !isFold" >
             <span>{{guest.name}}</span>
             <span>
                 <i class="fa fa-angle-right" v-show="isFold"></i>
@@ -18,15 +18,15 @@
 
 <script>
 export default {
-    name: 'fd-card',
-    data(){
-        return {
-            isFold: true
-        }
-    },
-    props:{
-        guest:Object
+  name: 'fd-card',
+  data () {
+    return {
+      isFold: true
     }
+  },
+  props: {
+    guest: Object
+  }
 }
 </script>
 
@@ -52,5 +52,3 @@ export default {
     }
 }
 </style>
-
-

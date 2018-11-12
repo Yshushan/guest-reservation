@@ -1,11 +1,11 @@
 <template>
     <div id="add-area">
-      <layout v-bind="headParams">
-        <mt-cell style="margin:6px; border-radius:5px;" 
+      <layout title="选择到访区域" back="guestRegister">
+        <mt-cell style="margin:6px; border-radius:5px;"
                 v-for="area of mainAreas"
-                :key="area.id"
-                :title="area.value"
-                :to="{name: 'addSubArea', params:{areaId: area.id}}"
+                :key="area.realId"
+                :title="area.nodeName"
+                :to="{name: 'addSubArea', params:{areaId: area.realId}}"
                 @click.native="$store.commit('updateMainArea', area)">
                 <i class="fa fa-angle-right"></i>
         </mt-cell>
@@ -17,7 +17,6 @@
 import { mainAreas } from '@/testData.js'
 export default {
   name: 'add-area',
-  props:['headParams'],
   data () {
     return {
       mainAreas: []
@@ -27,7 +26,6 @@ export default {
     // fetch mainAreas data
     // fetch(url).then(res=>res.json()).then(data => this.mainAreas = data)
     this.mainAreas = mainAreas
-  },
+  }
 }
 </script>
-

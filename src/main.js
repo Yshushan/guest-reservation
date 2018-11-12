@@ -10,7 +10,6 @@ import addedList from '@/components/addedList'
 Vue.component(layout.name, layout)
 Vue.component(addedList.name, addedList)
 
-
 Vue.use(MintUI)
 
 Vue.filter('formatTime', function (value) {

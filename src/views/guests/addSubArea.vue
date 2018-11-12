@@ -1,13 +1,13 @@
 <template>
     <div id="add-sub-area">
       <layout title="选择到访区域" back="addArea">
-        <mt-cell style="margin:6px; border-radius:5px;" 
+        <mt-cell style="margin:6px; border-radius:5px;"
                 v-for="area of subAreas"
-                :key="area.id"
-                :title="area.value"
+                :key="area.organizationId"
+                :title="area.organizationName"
                 :to="{name: 'guestRegister'}"
                 @click.native="$store.commit('updateSubArea', area)">
-          <i class="iconStyle fa fa-angle-right"></i>
+          <i class="fa fa-angle-right"></i>
         </mt-cell>
       </layout>
     </div>
@@ -31,4 +31,3 @@ export default {
   }
 }
 </script>
-

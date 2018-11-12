@@ -2,6 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
+import addCar from '@/views/guests/addCar'
+import addGuest from '@/views/guests/addGuest'
+import searchEmployee from '@/views/guests/searchEmployee'
+import addMaterial from '@/views/guests/addMaterial'
+import reservation from '@/views/guests/reservation'
+import addArea from '@/views/guests/addArea'
+import addSubArea from '@/views/guests/addSubArea'
+import recordDetail from '@/views/guests/recordDetail'
+
 Vue.use(Router)
 
 export default new Router({
@@ -23,79 +32,54 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/guests/guestRegister.vue')
+      component: () => import(/* webpackChunkName: "guestRegister" */ './views/guests/guestRegister.vue')
     },
     {
       path: '/reservation',
       name: 'reservation',
-      component: () => import(/* webpackChunkName: "reservation" */ './views/guests/Reservation.vue')
+      component: reservation
     },
     {
       path: '/reservation/guestRegister/searchEmployee',
-      name: 'searchEmployee', 
-      props:{
-        headParams:{
-          title: '添加被访人',
-          back: 'guestRegister'
-        }
-      },
-      component: () => import(/* webpackChunkName: "searchEmployee" */ './views/guests/searchEmployee.vue')
+      name: 'searchEmployee',
+      component: searchEmployee
     },
     {
       path: '/reservation/guestRegister/addGuest',
       name: 'addGuest',
-      props:{
-        headParams:{
-          title: '添加来访人员',
-          back: 'guestRegister'
-        }
-      },
-      component: () => import(/* webpackChunkName: "addGuest" */ './views/guests/addGuest.vue')
+      component: addGuest
     },
     {
       path: '/reservation/guestRegister/addMaterial',
       name: 'addMaterial',
-      props:{
-        headParams:{
-          title: '添加携带物品',
-          back: 'guestRegister'
-        }
-      },
-      component: () => import(/* webpackChunkName: "addMaterial" */ './views/guests/addMaterial.vue')
+      component: addMaterial
     },
     {
       path: '/reservation/guestRegister/addArea',
       name: 'addArea',
-      props:{
-        headParams:{
-          title: '选择到访区域',
-          back: 'guestRegister'
-        }
-      },
-      component: () => import(/* webpackChunkName: "addArea" */ './views/guests/addArea.vue')
+      component: addArea
     },
     {
       path: '/reservation/guestRegister/addArea/:areaId',
       props: true,
       name: 'addSubArea',
-      component: () => import(/* webpackChunkName: "addSubArea" */ './views/guests/addSubArea.vue')
+      component: addSubArea
     },
     {
       path: '/reservation/visitRecords',
       name: 'visitRecords',
-      props:{
-        headParams:{
-          title: '到访记录',
-          back: 'reservation'
-        }
-      },
-      component: () => import(/* webpackChunkName: "addArea" */ './views/guests/visitRecords.vue')
+      component: () => import(/* webpackChunkName: "visitRecords" */ './views/guests/visitRecords.vue')
     },
     {
       path: '/reservation/visitRecords/:recordId',
       name: 'recordDetail',
       props: true,
-      component: () => import(/* webpackChunkName: "addArea" */ './views/guests/recordDetail.vue')
+      component: recordDetail
+    },
+    {
+      path: '/reservation/guestRegister/addCar',
+      name: 'addCar',
+      component: addCar
     }
   ]
 })

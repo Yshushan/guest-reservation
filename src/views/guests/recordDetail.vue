@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import fdCard from '@/components/fdCard';
+import fdCard from '@/components/fdCard'
 export default {
   name: 'record-detail',
-  components:{
-    fdCard,
+  components: {
+    fdCard
   },
-  props:['recordId'],
-  data(){
+  props: ['recordId'],
+  data () {
     return {
-      guest:{
+      guest: {
         name: 'nicholas',
         address: 'asdfasdfasdfasd',
         gender: 'male',
@@ -30,19 +30,16 @@ export default {
         idType: 'idcard',
         idNum: '3241234198571451234'
       },
-      materials:[],
-      record:{
+      materials: [],
+      record: {
         status: '申请成功',
         submitTime: '2018'
       }
     }
   },
-  created(){
+  created () {
     // fetch data
-    
+
   }
-};
+}
 </script>
-
-
-
