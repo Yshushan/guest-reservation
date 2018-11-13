@@ -6,9 +6,11 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import layout from '@/components/layout'
 import addedList from '@/components/addedList'
+import yInput from '@/components/yInput'
 
 Vue.component(layout.name, layout)
 Vue.component(addedList.name, addedList)
+Vue.component(yInput.name, yInput)
 
 Vue.use(MintUI)
 

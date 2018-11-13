@@ -13,7 +13,9 @@ export default new Vuex.Store({
     materials: [],
     cars: [],
     subArea: null,
-    mainArea: null
+    mainArea: null,
+    visitDate: null,
+    visitType: ''
   },
   mutations: {
     addEmployee (state, employee) {
@@ -42,8 +44,13 @@ export default new Vuex.Store({
     },
     updateSubArea (state, subArea) {
       state.subArea = subArea
+    },
+    updateVisitDate(state, value){
+      state.visitDate = value
+    },
+    updateVisitType(state, value){
+      state.visitType = value
     }
-
   },
   actions: {
 

@@ -4,29 +4,15 @@
       <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
     </mt-header>
     <div class="register-form">
-      <mt-field label="被访员工" placeholder="添加被访人" :value="employee.userName" :readonly="true" @click.native="$router.push({name:'searchEmployee'})">
-        <i class="fa fa-angle-right"></i>
-      </mt-field>
-      <mt-field label="来访人员" placeholder="添加来访人员" :value="guestsName" :readonly="true" @click.native="$router.push({name: 'addGuest'})">
-        <i class="fa fa-angle-right"></i>
-      </mt-field>
-      <mt-field label="携带物品" placeholder="添加携带物品" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})">
-        <i class="fa fa-angle-right"></i>
-      </mt-field>
-      <mt-field label="到访区域" placeholder="选择到访区域" :value="fullArea" :readonly="true" @click.native="$router.push({name: 'addArea'})">
-        <i class="fa fa-angle-right"></i>
-      </mt-field>
-      <mt-field label="到访车辆" placeholder="添加到访车辆" :value="cars" :readonly="true" @click.native="$router.push({name: 'addCar'})">
-        <i class="fa fa-angle-right"></i>
-      </mt-field>
-      <mt-field label="到访时间" placeholder="请选择到访时间" :value="visitDate | formatTime" :readonly="true"  @click.native="$refs.picker.open()">
-        <i class="fa fa-angle-right"></i>
-      </mt-field>
-      <mt-field label="到访类型" placeholder="请选择" :value="visitType | dictTransform('visit')" :readonly="true" @click.native="selectType">
-        <i class="fa fa-angle-right"></i>
-      </mt-field>
+      <y-input label="被访员工" placeholder="添加被访人" icon="fa fa-angle-right" :required="true" :value="employee.userName" :readonly="true" @click.native="$router.push({name:'searchEmployee'})"/>
+      <y-input label="来访人员" placeholder="添加来访人员" icon="fa fa-angle-right" :required="true" :value="guestsName" :readonly="true" @click.native="$router.push({name: 'addGuest'})"/>
+      <y-input label="到访区域" placeholder="选择到访区域" icon="fa fa-angle-right" :required="true" :value="fullArea" :readonly="true" @click.native="$router.push({name: 'addArea'})"/>
+      <y-input label="到访时间" placeholder="请选择到访时间" icon="fa fa-angle-right" :required="true" :value="visitDate | formatTime" :readonly="true"  @click.native="$refs.picker.open()"/>
+      <y-input label="到访类型" placeholder="请选择" icon="fa fa-angle-right" :required="true" :value="visitType | dictTransform('visit')" :readonly="true" @click.native="selectType"/>
+      <y-input label="携带物品" placeholder="添加携带物品" icon="fa fa-angle-right" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})"/>
+      <y-input label="到访车辆" placeholder="添加到访车辆" icon="fa fa-angle-right" :value="cars" :readonly="true" @click.native="$router.push({name: 'addCar'})"/>
     </div>
-    <mt-button class="sumbit-btn" type="primary" size="large" @click.native="sumbit">提交</mt-button>
+    <mt-button class="sumbit-btn" type="primary" size="large" @click.native="submit">提交</mt-button>
     <mt-datetime-picker
         v-model="pickerValue"
         ref="picker"
@@ -49,14 +35,13 @@
 
 <script>
 import { visitTypeSlots, visitTypeDict } from '@/testData.js'
+import { Toast } from 'mint-ui'
 export default {
   name: 'guest-register',
   data () {
     return {
       pickerValue: null,
       popupVisible: false,
-      visitDate: null,
-      visitType: '',
       slots: [],
       temp: ''
     }
@@ -75,7 +60,7 @@ export default {
     onValuesChange (picker, values) {
       this.temp = values[0] ? values[0].value : ''
     },
-    sumbit () {
+    submit () {
       const registerData = {}
       registerData.userId = this.employee.userId
       registerData.guestBelongs = this.$store.state.materials.map(m => Object.values(m).join('&')).join('$')
@@ -83,11 +68,33 @@ export default {
       registerData.visitArea = this.fullArea.split('-')[1]
       registerData.visitType = this.visitType
       registerData.visitDate = this.visitDate
-
       const guests = this.$store.state.guests
+      if(Object.keys(registerData).some(key => {
+        return !registerData[key] && !['guestBelongs', 'visitCarNumber'].includes(key)
+        }) || !guests.length) {
+          Toast('请填写必要的信息！')
+      } else{
+
+      }
     }
   },
   computed: {
+    visitDate: {
+      get(){
+        return this.$store.state.visitDate
+      },
+      set(value){
+        this.$store.commit('updateVisitDate', value)
+      }
+    },
+    visitType: {
+      get(){
+        return this.$store.state.visitType
+      },
+      set(value){
+        this.$store.commit('updateVisitType', value)
+      }
+    },
     employee () {
       return this.$store.state.employee
     },

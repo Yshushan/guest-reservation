@@ -1,8 +1,6 @@
 <template>
   <div id="reservation">
-    <mt-header title="访客预约">
-      <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
-    </mt-header>
+    <span class="back-btn" @click="goback"><i class= "fa fa-angle-left" style="margin-right: 6px; font-size: 20px"></i>返回</span>
     <div class="btnBox">
       <mt-button class="btn" type="primary" size="large" @click.native="$router.push({ name: 'guestRegister' })">预约登记</mt-button>
       <mt-button class="btn" type="primary" size="large" @click.native="$router.push({ name: 'visitRecords' })">来访记录</mt-button>
@@ -16,7 +14,7 @@ export default {
   methods: {
     goback () {
       if (history.length) {
-        this.$router.go(-1)
+        this.$router.push('/')
       }
     }
   }
@@ -25,19 +23,29 @@ export default {
 
 <style lang="scss" scoped>
 #reservation{
+  position: relative;
+  background-image: url('bg.jpg');
+  background-repeat: round;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  .back-btn{
+    padding: 10px 10px;
+    color: #d9d9d9;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .btnBox{
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100px;
-    margin-bottom: 40px;
+    width: 100%;
+    bottom: 35px;
     .btn{
-      width: 95%;
+      width: 96%;
     }
   }
 }

@@ -12,7 +12,7 @@ const genderDict = [
 const certificateTypeDict = [
   {
     name: '身份证',
-    value: 'IDCard'
+    value: 'IDcard'
   },
   {
     name: '护照',
@@ -73,7 +73,7 @@ const certificateTypeSlots = [{
   flex: 1,
   values: [{
     label: '身份证',
-    value: 'IDCard'
+    value: 'IDcard'
   }, {
     label: '护照',
     value: 'passport'

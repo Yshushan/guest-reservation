@@ -2,7 +2,7 @@
     <div id="add-car">
         <layout title="添加车牌号" back="guestRegister">
             <mt-button slot="header-right" @click.native="confirm" >确定</mt-button>
-            <mt-field label="车牌号" placeholder="请输入车牌号，如：粤A-66666" v-model="car"></mt-field>
+            <y-input label="车牌号" placeholder="请输入车牌号，如：粤A-66666" v-model.trim="car"/>
             <added-list :lists="cars" @delete="deleteCar">
                 <span>已添加车辆信息</span>
             </added-list>
@@ -33,7 +33,7 @@ export default {
         .catch(() => {})
     },
     confirm () {
-      if (!this.car) Toast('请输入信息！')
+      if (!this.car) Toast('请输入车牌信息！')
       else {
         this.$store.commit('addCar', this.car)
         this.$router.push({ name: 'guestRegister' })

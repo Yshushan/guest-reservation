@@ -40,7 +40,7 @@ export default {
         color: rgb(32, 13, 13);
         div{
             background-color: rgb(178, 206, 245);
-            padding: 15px 15px;
+            padding: 13px 15px;
             margin: 7px;
             border-radius: 5px;
             display: grid;
