@@ -267,6 +267,47 @@ const visitRecords = [
   }
 ]
 
+const recordDetail = {
+  id: 1,
+  status: 'success',
+  createDate: new Date(),
+  visitType: '供应商',
+  carNumber: '粤A-34233',
+  employee: {
+    userId: 32,
+    userName: '张三',
+    userPhone: '15922753198'
+  },
+  guests: [{
+    gusetName: '小杨',
+    guestAddress: '杭州阿里巴巴科技有限公司',
+    guestGender: 'male',
+    guestTelphone: '13105693117',
+    certificateType: '身份证',
+    certificateNumber: '453627829872652673'
+  },{
+    gusetName: '小李',
+    guestAddress: '深圳腾讯互联网有限公司',
+    guestGender: 'female',
+    guestTelphone: '13545693117',
+    certificateType: '身份证',
+    certificateNumber: '453627829872652673'
+  }],
+  guestBelongs: [{
+    name: '笔记本电脑',
+    count: 1,
+    type: '电脑',
+    remark: ''
+  },{
+    name: '公文包',
+    count: 2,
+    type: '',
+    remark: ''
+  }]
+}
+
+
+
 export {
   historyData,
   genderSlots,
@@ -277,5 +318,6 @@ export {
   visitRecords,
   genderDict,
   certificateTypeDict,
-  visitTypeDict
+  visitTypeDict,
+  recordDetail
 }

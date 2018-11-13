@@ -50,20 +50,20 @@ export default {
     min-height: 45px;
     background-color: white;
     label{
-        width: 30%;
+        width: 32%;
         display: flex;
         align-self: center;
     }
     input{
-        width: 62%;
+        width: 61%;
         border: 0;
         outline: 0;
         font-size: inherit;
     }
     &>span{
         box-sizing: border-box;
-        width: 8%;
-        padding-right: 12px;
+        width: 7%;
+        padding-right: 10px;
         display: flex;
         justify-content: flex-end;
         align-items: center;

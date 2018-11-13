@@ -8,7 +8,7 @@
       <y-input label="来访人员" placeholder="添加来访人员" icon="fa fa-angle-right" :required="true" :value="guestsName" :readonly="true" @click.native="$router.push({name: 'addGuest'})"/>
       <y-input label="到访区域" placeholder="选择到访区域" icon="fa fa-angle-right" :required="true" :value="fullArea" :readonly="true" @click.native="$router.push({name: 'addArea'})"/>
       <y-input label="到访时间" placeholder="请选择到访时间" icon="fa fa-angle-right" :required="true" :value="visitDate | formatTime" :readonly="true"  @click.native="$refs.picker.open()"/>
-      <y-input label="到访类型" placeholder="请选择" icon="fa fa-angle-right" :required="true" :value="visitType | dictTransform('visit')" :readonly="true" @click.native="selectType"/>
+      <y-input label="到访类型" placeholder="请选择" icon="fa fa-angle-right" :required="true" :value="visitType | dictTransform" :readonly="true" @click.native="selectType"/>
       <y-input label="携带物品" placeholder="添加携带物品" icon="fa fa-angle-right" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})"/>
       <y-input label="到访车辆" placeholder="添加到访车辆" icon="fa fa-angle-right" :value="cars" :readonly="true" @click.native="$router.push({name: 'addCar'})"/>
     </div>
@@ -61,22 +61,37 @@ export default {
       this.temp = values[0] ? values[0].value : ''
     },
     submit () {
-      const registerData = {}
-      registerData.userId = this.employee.userId
-      registerData.guestBelongs = this.$store.state.materials.map(m => Object.values(m).join('&')).join('$')
-      registerData.visitCarNumber = this.cars,
-      registerData.visitArea = this.fullArea.split('-')[1]
-      registerData.visitType = this.visitType
-      registerData.visitDate = this.visitDate
-      const guests = this.$store.state.guests
-      if(Object.keys(registerData).some(key => {
+      const registerData = this.registerData()
+      // registerData.userId = this.employee.userId
+      // registerData.guestBelongs = this.$store.state.materials.map(m => Object.values(m).join('&')).join('$')
+      // registerData.visitCarNumber = this.cars,
+      // registerData.visitArea = this.fullArea.split('-')[1]
+      // registerData.visitType = this.visitType
+      // registerData.visitDate = this.visitDate
+      // const guests = this.$store.state.guests
+      if(Object.keys(registerData.mainData).some(key => {
         return !registerData[key] && !['guestBelongs', 'visitCarNumber'].includes(key)
         }) || !guests.length) {
           Toast('请填写必要的信息！')
       } else{
 
       }
+    },
+    registerData(){
+      const mainData = {
+        userId: this.employee.userId,
+        visitArea: this.fullArea.split('-')[1],
+        visitType: this.visitType,
+        visitDate: this.visitDate,
+        visitCarNumber: this.cars,
+        guestBelongs: this.$store.state.materials.map(m => Object.values(m).join('&')).join('$'),
+      }
+      return {
+        mainData, 
+        guests: this.$store.state.guests
+      }
     }
+
   },
   computed: {
     visitDate: {
@@ -112,18 +127,22 @@ export default {
     }
   },
   filters: {
-    dictTransform (value, type) {
-      if (!value) return
-      if (type === 'visit') {
+    dictTransform (value) {
+      if (value) 
         return visitTypeDict.find(item => item.value === value).name
-      }
     }
   },
   beforeRouteLeave(to, from, next){
     if(to.name === 'reservation'){
-      MessageBox('当前页面信息还没保存，确定要离开？').then(action => {
-        if(action) next()
-      }).catch(()=>{})
+      const registerData = this.registerData()
+      if(Object.values(registerData.mainData).some(value => value) || registerData.guests.length){
+        MessageBox.confirm('当前页面信息还没保存，确定要离开？', '提示').then(action => {
+          if(action) next()
+          else next(false)
+        }).catch(()=>{})
+      }else{
+        next()
+      }
     }else {
       next()
     }

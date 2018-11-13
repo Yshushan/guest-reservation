@@ -111,7 +111,7 @@ export default {
           const re2 = /^[a-zA-Z0-9]{5,17}$/
           this.warnings.certificate = !re1.test(this.guest.certificateNumber) || !re2.test(this.guest.certificateNumber)
         }else{
-
+          //
         }
       }
     }

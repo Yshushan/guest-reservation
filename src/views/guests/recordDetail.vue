@@ -1,7 +1,12 @@
 <template>
   <div id="record-detail">
     <layout title="到访详情" back="visitRecords">
-      <mt-cell title="状态" value=""></mt-cell>
+      <mt-cell title="状态" :value="recordDetail.status"></mt-cell>
+      <mt-cell title="访问时间" :value="recordDetail.createDate"></mt-cell>
+      <mt-cell title="访问类型" :value="recordDetail.visitType"></mt-cell>
+      <mt-cell title="被访人" ></mt-cell>
+      <mt-cell title="访问类型" :value="recordDetail.visitType"></mt-cell>
+      
 		  <fd-card :guest="guest"></fd-card>
 		  <fd-card :guest="guest"></fd-card>
 		  <fd-card :guest="guest"></fd-card>
@@ -14,6 +19,7 @@
 
 <script>
 import fdCard from '@/components/fdCard'
+import { recordDetail } from '@/testData.js'
 export default {
   name: 'record-detail',
   components: {
@@ -22,24 +28,12 @@ export default {
   props: ['recordId'],
   data () {
     return {
-      guest: {
-        name: 'nicholas',
-        address: 'asdfasdfasdfasd',
-        gender: 'male',
-        phone: '12341243252',
-        idType: 'idcard',
-        idNum: '3241234198571451234'
-      },
-      materials: [],
-      record: {
-        status: '申请成功',
-        submitTime: '2018'
-      }
+      recordDetail: null
     }
   },
   created () {
     // fetch data
-
+    this.recordDetail = recordDetail
   }
 }
 </script>

@@ -8,9 +8,10 @@
             </span>
         </div>
         <div class="card-content" v-show="!isFold">
-            <div v-for="(value,key) of guest" :key="key" class="flex-box">
-                <span>{{key}}</span>
-                <span>{{value}}</span>
+            <div v-for="(value,key) of guest" 
+                :key="key" class="flex-box" 
+                v-show="!key.includes(name)">
+                <span>{{key}}</span><span>{{value}}</span>
             </div>
         </div>
     </div>
