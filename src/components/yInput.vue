@@ -6,7 +6,7 @@
         </label>
         <input v-bind="$attrs" v-on="listeners" :value="value" >
         <span v-show="icon"><i :class="icon"></i></span>
-        <span v-show="warning" style="color: red; font-size: 20px;"><i class='fa fa-times-circle'></i></span>
+        <span v-show="warning" style="color: red; font-size: 16px;"><i class='fa fa-exclamation-triangle'></i></span>
     </div>
 </template>
 

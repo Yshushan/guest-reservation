@@ -35,7 +35,7 @@
 
 <script>
 import { visitTypeSlots, visitTypeDict } from '@/testData.js'
-import { Toast } from 'mint-ui'
+import { Toast, MessageBox } from 'mint-ui'
 export default {
   name: 'guest-register',
   data () {
@@ -117,6 +117,15 @@ export default {
       if (type === 'visit') {
         return visitTypeDict.find(item => item.value === value).name
       }
+    }
+  },
+  beforeRouteLeave(to, from, next){
+    if(to.name === 'reservation'){
+      MessageBox('当前页面信息还没保存，确定要离开？').then(action => {
+        if(action) next()
+      }).catch(()=>{})
+    }else {
+      next()
     }
   }
 }
