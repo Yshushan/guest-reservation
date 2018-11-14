@@ -5,11 +5,13 @@
       <div class="guest-form">
         <y-input label="来访单位" :required="true"  placeholder="请输入来访单位全名" v-model.trim="guest.guestAddress"/>
         <y-input label="访客姓名" :required="true"  placeholder="请输入姓名" v-model.trim="guest.guestName"/>
-        <y-input label="性别" :required="true" placeholder="请选择" :value="guest.guestGender | dictTransform('gender')" @click.native="selectGender" :readonly="true"/>
+        <y-input label="性别" :required="true" placeholder="请选择" :value="guest.guestGender | dictTransform('gender')" @click.native="selectGender" readonly/>
         <y-input label="手机号" :required="true" :warning="warnings.phone" placeholder="请输入手机号" v-model.trim="guest.guestTelphone" @blur="checkPhone"/>
         <y-input label="电子邮箱" :required="true" :warning="warnings.email" placeholder="请输入邮箱地址" v-model.trim="guest.guestEmail" @blur="checkEmail"/>
-        <y-input label="证件类型" :required="true"  placeholder="请选择" :value="guest.certificateType | dictTransform('certificate')" @click.native="selectCertificate" :readonly="true"/>
-        <y-input label="证件号" :required="true" :warning="warnings.certificate" placeholder="请输入证件号" v-model.trim="guest.certificateNumber" @blur="checkCertificate"/>
+        <y-input label="证件类型" :required="true"  placeholder="请选择" :value="guest.certificateType | dictTransform('certificate')"
+                                @click.native="selectCertificate" readonly/>
+        <y-input label="证件号" :required="true" :warning="warnings.certificate" placeholder="请输入证件号" 
+                                v-model.trim="guest.certificateNumber" @blur="checkCertificate" :readonly="!guest.certificateType" />
     </div>
     <added-list :lists="guests" icon="fa fa-minus" @action="deleteGuest">
       <span v-show="guests.length">已添加人员名单</span>
@@ -48,6 +50,12 @@ export default {
       popupVisible: false,
       slots: [],
       temp: ''
+    }
+  },
+  watch: {
+    'guest.certificateType': function (n, o) {
+      this.guest.certificateNumber = ''
+      this.warnings.certificate = false
     }
   },
   methods: {
@@ -92,11 +100,15 @@ export default {
     checkPhone(){
       if(this.guest.guestTelphone)
         this.warnings.phone = !/^1[34578]\d{9}$/.test(this.guest.guestTelphone)
+      else 
+        this.warnings.phone = false
     },
     checkEmail(){
       if(this.guest.guestEmail){
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         this.warnings.email = !re.test(this.guest.guestEmail)
+      } else {
+        this.warnings.email = false
       }
     },
     checkCertificate(){
@@ -111,6 +123,8 @@ export default {
         }else{
           //
         }
+      } else{
+        this.warnings.certificate = false
       }
     }
   },

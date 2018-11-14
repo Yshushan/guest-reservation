@@ -13,7 +13,6 @@
 		  <fd-card v-for="(material, index) of recordDetail.guestBelongs" :key="index+100" :group="material"></fd-card>
       <mt-cell title="其它" class="group-head" v-if="recordDetail.carNumber"></mt-cell>
       <mt-cell title="到访车辆" :value="recordDetail.carNumber" v-if="recordDetail.carNumber"></mt-cell>
-
     </layout>
     </div>
 </template>
