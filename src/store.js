@@ -5,17 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    employee: {
-      userName: '',
-      userId: null
-    },
     guests: [],
     materials: [],
     cars: [],
-    subArea: null,
-    mainArea: null,
+    employee: null,
+    visitArea: null,
+    // mainArea: null,
     visitDate: null,
-    visitType: ''
+    visitType: null
   },
   mutations: {
     addEmployee (state, employee) {
@@ -39,20 +36,23 @@ export default new Vuex.Store({
     deleteMaterial (state, name) {
       state.materials = state.materials.filter(m => m.name !== name)
     },
-    updateMainArea (state, mainArea) {
-      state.mainArea = mainArea
-    },
-    updateSubArea (state, subArea) {
-      state.subArea = subArea
+    // updateMainArea (state, mainArea) {
+    //   state.mainArea = mainArea
+    // },
+    updateVisitArea (state, value) {
+      state.visitArea = value
     },
     updateVisitDate(state, value){
       state.visitDate = value
     },
     updateVisitType(state, value){
       state.visitType = value
+    },
+    clearAll(state){
+      Object.keys(state).forEach(key => state[key] = Array.isArray(state[key]) ? [] : null)
     }
   },
   actions: {
-
+    
   }
 })

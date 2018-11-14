@@ -15,7 +15,7 @@
   height: 100%;
   overflow: auto;
   background-color: #eee;
-  font-size: 15.5px;  
+  font-size: 16px;  
 }
 html,body{
   height:100%;

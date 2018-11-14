@@ -24,16 +24,16 @@ const certificateTypeDict = [
   }
 ]
 
-const visitTypeDict = [
-  {
-    name: '供应商',
-    value: 'vendor'
-  },
-  {
-    name: '采购商',
-    value: 'buyer'
-  }
-]
+// const visitTypeDict = [
+//   {
+//     name: '供应商',
+//     value: 'vendor'
+//   },
+//   {
+//     name: '采购商',
+//     value: 'buyer'
+//   }
+// ]
 
 const historyData = [{
   userId: 1,
@@ -156,12 +156,18 @@ const visitTypeSlots = [{
   flex: 1,
   values: [
     {
-      label: '供应商',
-      value: 'vendor'
+      label: '合作商谈',
+      value: 'cooperateNegotiation'
     },
     {
-      label: '采购商',
-      value: 'buyer'
+      label: '应聘面试',
+      value: 'applicationInterview'
+    },{
+      label: '客户参观',
+      value: 'customerVisit'
+    },{
+      label: '其它',
+      value: 'others'
     }
   ],
   className: 'slot1',
@@ -172,122 +178,60 @@ const visitTypeSlots = [{
 const visitRecords = [
   {
     id: 1,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'success'
+    visitDate: new Date(),
+    userName: '张三',
+    visitArea: '美云智数',
+    visitType: 'customerVisit',
+    status: 'pending'
   },
   {
     id: 2,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'fail'
+    visitDate: new Date(),
+    userName: '张三',
+    visitArea: '美云智数',
+    visitType: 'customerVisit',
+    status: 'reject'
   },
   {
     id: 3,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
+    visitDate: new Date(),
+    userName: '张三',
+    visitArea: '美云智数',
+    visitType: 'cooperateNegotiation',
     status: 'success'
   },
   {
     id: 4,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'fail'
-  },
-  {
-    id: 6,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'fail'
-  },
-  {
-    id: 7,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
+    visitDate: new Date(),
+    userName: '张三',
+    visitArea: '美云智数',
+    visitType: 'applicationInterview',
     status: 'success'
   },
-  {
-    id: 8,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'success'
-  },
-  {
-    id: 9,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'fail'
-  }, {
-    id: 10,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'fail'
-  },
-  {
-    id: 12,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'success'
-  },
-  {
-    id: 13,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'success'
-  },
-  {
-    id: 14,
-    time: '2018-09-26 10:17:42',
-    employee: '张三',
-    area: '美云之数',
-    reason: '供应商',
-    status: 'fail'
-  }
 ]
 
 const recordDetail = {
   id: 1,
   status: 'success',
   createDate: new Date(),
-  visitType: '供应商',
-  carNumber: '粤A-34233',
+  visitType: 'applicationInterview',
+  visitArea: '美的集团-美云智数',
+  carNumber: '浙A-34233,粤B-83729',
   employee: {
     userId: 32,
-    userName: '张三',
+    userName: '小杨',
     userPhone: '15922753198'
   },
   guests: [{
-    gusetName: '小杨',
-    guestAddress: '杭州阿里巴巴科技有限公司',
+    guestName: '马云',
+    guestAddress: '杭州阿里巴巴集团股份有限公司',
     guestGender: 'male',
     guestTelphone: '13105693117',
     certificateType: '身份证',
     certificateNumber: '453627829872652673'
   },{
-    gusetName: '小李',
-    guestAddress: '深圳腾讯互联网有限公司',
+    guestName: '马化腾',
+    guestAddress: '深圳腾讯股份有限公司',
     guestGender: 'female',
     guestTelphone: '13545693117',
     certificateType: '身份证',
@@ -297,7 +241,7 @@ const recordDetail = {
     name: '笔记本电脑',
     count: 1,
     type: '电脑',
-    remark: ''
+    remark: '酒虎诗龙啊是的佛阿斯蒂芬阿斯蒂'
   },{
     name: '公文包',
     count: 2,
@@ -306,7 +250,30 @@ const recordDetail = {
   }]
 }
 
+const visitTypeDict = [{
+  name: '合作商谈',
+  value: 'cooperateNegotiation'
+},{
+  name: '应聘面试',
+  value: 'applicationInterview'
+},{
+  name: '客户参观',
+  value: 'customerVisit'
+},{
+  name: '其它',
+  value: 'others'
+}]
 
+const statusDict = [{
+  name: '审核中',
+  value: 'pending',
+},{
+  name: '已通过',
+  value: 'success',
+},{
+  name: '已拒绝',
+  value: 'reject',
+}]
 
 export {
   historyData,
@@ -319,5 +286,6 @@ export {
   genderDict,
   certificateTypeDict,
   visitTypeDict,
-  recordDetail
+  recordDetail,
+  statusDict
 }

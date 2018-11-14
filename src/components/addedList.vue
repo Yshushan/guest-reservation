@@ -6,14 +6,13 @@
         <div class="list-content" v-if="lists.length">
             <div v-for="(item,key) of lists" :key="key">
                 <span>{{item.userName || item.guestName || item.name || item}}</span>
-                <span>{{item.userPhone || item.guestTelphone ||item.count || ''}}</span>
-                <span v-if="item.userName" @click="$emit('add', item)"><i class="fa fa-plus"></i></span>
-                <span v-else  @click="$emit('delete', item)"><i class="fa fa-minus"></i></span>
+                <span>{{item.userPhone || item.guestTelphone || item.count || ''}}</span>
+                <span @click="$emit('action', item)"><i :class="icon"></i></span>
             </div>
         </div>
-        <div class="empty" v-else>
+        <!-- <div class="empty" v-else>
             无！
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -21,7 +20,8 @@
 export default {
   name: 'added-list',
   props: {
-    lists: Array
+    lists: Array,
+    icon: String
   }
 }
 </script>
@@ -36,7 +36,6 @@ export default {
         font-weight: 600;
     }
     .list-content {
-
         color: rgb(32, 13, 13);
         div{
             background-color: rgb(178, 206, 245);

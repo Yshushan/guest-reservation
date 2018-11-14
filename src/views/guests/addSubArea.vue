@@ -6,7 +6,7 @@
                 :key="area.organizationId"
                 :title="area.organizationName"
                 :to="{name: 'guestRegister'}"
-                @click.native="$store.commit('updateSubArea', area)">
+                @click.native="$store.commit('updateVisitArea', area)">
           <i class="fa fa-angle-right"></i>
         </mt-cell>
       </layout>

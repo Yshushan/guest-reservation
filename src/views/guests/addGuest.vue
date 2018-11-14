@@ -11,8 +11,8 @@
         <y-input label="证件类型" :required="true"  placeholder="请选择" :value="guest.certificateType | dictTransform('certificate')" @click.native="selectCertificate" :readonly="true"/>
         <y-input label="证件号" :required="true" :warning="warnings.certificate" placeholder="请输入证件号" v-model.trim="guest.certificateNumber" @blur="checkCertificate"/>
     </div>
-    <added-list :lists="guests" @delete="deleteGuest">
-      <span>已添加人员名单</span>
+    <added-list :lists="guests" icon="fa fa-minus" @action="deleteGuest">
+      <span v-show="guests.length">已添加人员名单</span>
     </added-list>
   </layout>
 		<mt-popup v-model="popupVisible" position="bottom" class="popup">
@@ -89,7 +89,6 @@ export default {
       }
       this.popupVisible = false
     },
-
     checkPhone(){
       if(this.guest.guestTelphone)
         this.warnings.phone = !/^1[34578]\d{9}$/.test(this.guest.guestTelphone)
@@ -103,9 +102,8 @@ export default {
     checkCertificate(){
       if(this.guest.certificateNumber){
         if(this.guest.certificateType === 'IDcard') {
-          const IDcardReg15 = /^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$/
-          const IDcardReg18 = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
-          this.warnings.certificate = !IDcardReg15.test(this.guest.certificateNumber) || !IDcardReg18.test(this.guest.certificateNumber)
+          const re = /^\d{6}(19|20)\d{2}((0[13578]|10|12)(0[1-9]|[12]\d|30|31)|(0[469]|11)(0[1-9]|[12]\d|30)|02(0[1-9]|[12]\d))\d{3}[0-9Xx]$/
+          this.warnings.certificate = !re.test(this.guest.certificateNumber)
         }else if(this.guest.certificateType === 'passport'){
           const re1 = /^[a-zA-Z]{5,17}$/
           const re2 = /^[a-zA-Z0-9]{5,17}$/
@@ -119,16 +117,6 @@ export default {
   computed: {
     guests () {
       return this.$store.state.guests
-    }
-  },
-  filters: {
-    dictTransform (value, type) {
-      if (!value) return ''
-      if (type === 'gender') {
-        return genderDict.find(item => item.value === value).name
-      } else if (type === 'certificate') {
-        return certificateTypeDict.find(item => item.value === value).name
-      }
     }
   }
 }

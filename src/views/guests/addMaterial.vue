@@ -5,11 +5,11 @@
       <div class="material-form">
         <y-input label="物件名称" placeholder="请输入物件名称" v-model.trim="material.name" :required="true"></y-input>
         <y-input label="数量" placeholder="请输入物件数量" type="number" v-model.number="material.count" :required="true"></y-input>
-        <y-input label="型号" placeholder="请输入物件类型" v-model.trim="material.type"></y-input>
+        <y-input label="类型" placeholder="请输入物件类型" v-model.trim="material.type"></y-input>
         <y-input label="备注" placeholder="100字以内" type="textarea" rows="3" v-model="material.remark"></y-input>
       </div>
-      <added-list :lists="materials" @delete="deleteMaterial">
-        <span>已添加物品列表</span>
+      <added-list :lists="materials" icon="fa fa-minus" @action="deleteMaterial">
+        <span v-show="materials.length">已添加物品列表</span>
       </added-list>
     </layout>
   </div>

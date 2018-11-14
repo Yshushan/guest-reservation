@@ -5,8 +5,7 @@
                 v-for="area of mainAreas"
                 :key="area.realId"
                 :title="area.nodeName"
-                :to="{name: 'addSubArea', params:{areaId: area.realId}}"
-                @click.native="$store.commit('updateMainArea', area)">
+                :to="{name: 'addSubArea', params:{areaId: area.realId}}">
                 <i class="fa fa-angle-right"></i>
         </mt-cell>
       </layout>
@@ -22,7 +21,7 @@ export default {
       mainAreas: []
     }
   },
-  mounted () {
+  created () {
     // fetch mainAreas data
     // fetch(url).then(res=>res.json()).then(data => this.mainAreas = data)
     this.mainAreas = mainAreas

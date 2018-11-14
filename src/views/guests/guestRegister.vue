@@ -1,14 +1,14 @@
 <template>
   <div id="guest-register">
     <mt-header title="访客预约登记">
-      <mt-button icon="back" slot="left" @click.native="goback">返回</mt-button>
+      <mt-button icon="back" slot="left" @click.native="$router.push({ name: 'reservation' })">返回</mt-button>
     </mt-header>
     <div class="register-form">
-      <y-input label="被访员工" placeholder="添加被访人" icon="fa fa-angle-right" :required="true" :value="employee.userName" :readonly="true" @click.native="$router.push({name:'searchEmployee'})"/>
+      <y-input label="被访员工" placeholder="添加被访人" icon="fa fa-angle-right" :required="true" :value="employee && employee.userName" :readonly="true" @click.native="$router.push({name:'searchEmployee'})"/>
       <y-input label="来访人员" placeholder="添加来访人员" icon="fa fa-angle-right" :required="true" :value="guestsName" :readonly="true" @click.native="$router.push({name: 'addGuest'})"/>
-      <y-input label="到访区域" placeholder="选择到访区域" icon="fa fa-angle-right" :required="true" :value="fullArea" :readonly="true" @click.native="$router.push({name: 'addArea'})"/>
+      <y-input label="到访区域" placeholder="选择到访区域" icon="fa fa-angle-right" :required="true" :value="visitArea" :readonly="true" @click.native="$router.push({name: 'addArea'})"/>
       <y-input label="到访时间" placeholder="请选择到访时间" icon="fa fa-angle-right" :required="true" :value="visitDate | formatTime" :readonly="true"  @click.native="$refs.picker.open()"/>
-      <y-input label="到访类型" placeholder="请选择" icon="fa fa-angle-right" :required="true" :value="visitType | dictTransform" :readonly="true" @click.native="selectType"/>
+      <y-input label="到访类型" placeholder="请选择" icon="fa fa-angle-right" :required="true" :value="visitType | dictTransform('visitType')" :readonly="true" @click.native="selectType"/>
       <y-input label="携带物品" placeholder="添加携带物品" icon="fa fa-angle-right" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})"/>
       <y-input label="到访车辆" placeholder="添加到访车辆" icon="fa fa-angle-right" :value="cars" :readonly="true" @click.native="$router.push({name: 'addCar'})"/>
     </div>
@@ -19,7 +19,6 @@
         type="date"
         @confirm="handleConfirm">
       </mt-datetime-picker>
-
     <mt-popup v-model="popupVisible" position="bottom" class="popup">
       <mt-picker :slots="slots"
                   value-key="label"
@@ -47,9 +46,6 @@ export default {
     }
   },
   methods: {
-    goback () {
-      this.$router.push({ name: 'reservation' })
-    },
     handleConfirm (value) {
       this.visitDate = value
     },
@@ -62,25 +58,24 @@ export default {
     },
     submit () {
       const registerData = this.registerData()
-      // registerData.userId = this.employee.userId
-      // registerData.guestBelongs = this.$store.state.materials.map(m => Object.values(m).join('&')).join('$')
-      // registerData.visitCarNumber = this.cars,
-      // registerData.visitArea = this.fullArea.split('-')[1]
-      // registerData.visitType = this.visitType
-      // registerData.visitDate = this.visitDate
-      // const guests = this.$store.state.guests
       if(Object.keys(registerData.mainData).some(key => {
-        return !registerData[key] && !['guestBelongs', 'visitCarNumber'].includes(key)
-        }) || !guests.length) {
+        return !registerData.mainData[key] && !['guestBelongs', 'visitCarNumber'].includes(key)
+        }) || !registerData.guests.length) {
           Toast('请填写必要的信息！')
       } else{
-
+        // 提交表单
+        Toast({
+          message: '提交成功',
+          iconClass: 'fa fa-check'
+        })
+        this.clearAll()
+        this.$router.push({ name: 'reservation' })
       }
     },
     registerData(){
       const mainData = {
-        userId: this.employee.userId,
-        visitArea: this.fullArea.split('-')[1],
+        userId: this.employee && this.employee.userId,
+        visitArea: this.visitArea,
         visitType: this.visitType,
         visitDate: this.visitDate,
         visitCarNumber: this.cars,
@@ -90,8 +85,10 @@ export default {
         mainData, 
         guests: this.$store.state.guests
       }
+    },
+    clearAll(){
+      this.$store.commit('clearAll')
     }
-
   },
   computed: {
     visitDate: {
@@ -119,17 +116,11 @@ export default {
     materials () {
       return this.$store.state.materials.map(material => material.name).join(',')
     },
-    fullArea () {
-      if (this.$store.state.subArea) { return `${this.$store.state.mainArea.nodeName}-${this.$store.state.subArea.organizationName}` } else return ''
+    visitArea () {
+      return this.$store.state.visitArea && this.$store.state.visitArea.organizationName
     },
     cars () {
       return this.$store.state.cars.join(',')
-    }
-  },
-  filters: {
-    dictTransform (value) {
-      if (value) 
-        return visitTypeDict.find(item => item.value === value).name
     }
   },
   beforeRouteLeave(to, from, next){
@@ -137,15 +128,11 @@ export default {
       const registerData = this.registerData()
       if(Object.values(registerData.mainData).some(value => value) || registerData.guests.length){
         MessageBox.confirm('当前页面信息还没保存，确定要离开？', '提示').then(action => {
-          if(action) next()
-          else next(false)
+          this.clearAll()
+          next()
         }).catch(()=>{})
-      }else{
-        next()
-      }
-    }else {
-      next()
-    }
+      }else next()
+    }else next()
   }
 }
 </script>

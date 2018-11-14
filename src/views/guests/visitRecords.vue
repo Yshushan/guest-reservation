@@ -7,18 +7,20 @@
               :to="{name: 'recordDetail', params:{recordId: record.id}}">
         <div slot="title" class="card">
           <div class='item'>
-            <span class="time">{{record.time}}</span>
-            <span :style="{ color: record.status === 'success' ? 'green' : 'red', 'font-weight': 600 }">
-              {{record.status}}
+            <span class="time">{{record.visitDate | formatTime}}</span>
+            <span class="status-base" :style="{ 'color': statusToColor[record.status]}">
+              {{record.status | dictTransform('status')}}
             </span>
           </div>
-          <div class="item">被访人: {{record.employee}}</div>
           <div class="item">
-            <span>到访地区: {{record.area}}</span>
-            <span>到访原因: {{record.reason}}</span>
+            <span>被访人: {{record.userName}}</span>
+            <span>到访类型: {{record.visitType | dictTransform('visitType')}}</span>
+          </div>
+          <div class="item">
+            <span>到访区域: {{record.visitArea}}</span>
+            <i class="fa fa-angle-right"></i>
           </div>
         </div>
-        <i class="fa fa-angle-right"></i>
       </mt-cell>
     </layout>
   </div>
@@ -26,11 +28,18 @@
 
 <script>
 import { visitRecords } from '@/testData.js'
+
+const statusToColor = {
+  pending: 'orange',
+  success: 'green',
+  reject: 'red'
+}
 export default {
   name: 'visit-records',
   data () {
     return {
-      visitRecords: []
+      visitRecords: [],
+      statusToColor,
     }
   },
   created () {
@@ -43,9 +52,10 @@ export default {
 <style lang="scss" scoped>
 #visit-records{
     .card-cell{
-      margin: 8px;
+      margin: 6px;
       border-radius: 5px;
       .card{
+        font-size: 15px;
         .item{
           display: flex;
           justify-content: space-between;
@@ -55,6 +65,10 @@ export default {
             .time{
               font-size: 13px;
               color: #999;
+           }
+           .status-base{
+             font-size: 15px;
+             font-weight: 700;
            }
           }
         }

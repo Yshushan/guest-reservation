@@ -6,8 +6,8 @@
         <y-input label="被访人姓名" placeholder="请输入姓名" v-model.trim="userName" :required="true"/>
         <y-input label="被访人手机号" placeholder="请输入手机号" v-model.trim="userPhone" :required="true"/>
       </div>
-      <added-list :lists="historyData" @add="addEmployee">
-        <span>历史访问人员记录（可直接添加）</span>
+      <added-list :lists="historyData" icon="fa fa-plus" @action="addEmployee">
+        <span v-show="historyData.length">历史访问人员记录（可直接添加）</span>
       </added-list>
     </layout>
   </div>
@@ -28,8 +28,8 @@ export default {
     }
   },
   created () {
-    this.userName = this.$store.state.employee.userName || ''
-    this.userPhone = this.$store.state.employee.userPhone || ''
+    this.userName = this.$store.state.employee && this.$store.state.employee.userName 
+    this.userPhone = this.$store.state.employee && this.$store.state.employee.userPhone
     // fetch history data
     this.historyData = historyData
   },
