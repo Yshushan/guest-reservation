@@ -4,57 +4,61 @@
       <mt-button icon="back" slot="left" @click.native="$router.push({ name: 'reservation' })">返回</mt-button>
     </mt-header>
     <div class="register-form">
-      <y-input label="被访员工" placeholder="添加被访人" icon="fa fa-angle-right" :required="true" :value="employee && employee.userName" :readonly="true" @click.native="$router.push({name:'searchEmployee'})"/>
-      <y-input label="来访人员" placeholder="添加来访人员" icon="fa fa-angle-right" :required="true" :value="guestsName" :readonly="true" @click.native="$router.push({name: 'addGuest'})"/>
-      <y-input label="到访区域" placeholder="选择到访区域" icon="fa fa-angle-right" :required="true" :value="visitArea" :readonly="true" @click.native="$router.push({name: 'addArea'})"/>
-      <y-input label="到访时间" placeholder="请选择到访时间" icon="fa fa-angle-right" :required="true" :value="visitDate | formatTime" :readonly="true"  @click.native="$refs.picker.open()"/>
-      <y-input label="到访类型" placeholder="请选择" icon="fa fa-angle-right" :required="true" :value="visitType | dictTransform('visitType')" :readonly="true" @click.native="selectType"/>
-      <y-input label="携带物品" placeholder="添加携带物品" icon="fa fa-angle-right" :value="materials" :readonly="true" @click.native="$router.push({name: 'addMaterial'})"/>
-      <y-input label="到访车辆" placeholder="添加到访车辆" icon="fa fa-angle-right" :value="cars" :readonly="true" @click.native="$router.push({name: 'addCar'})"/>
+      <y-input label="被访员工" placeholder="添加被访人" icon="fa fa-angle-right" :required="true"
+               :value="employee && employee.userName" readonly @click.native="$router.push({name:'searchEmployee'})"/>
+      <y-input label="来访人员" placeholder="添加来访人员" icon="fa fa-angle-right" :required="true" :value="guestsName" readonly
+               @click.native="$router.push({name: 'addGuest'})"/>
+      <y-input label="到访区域" placeholder="选择到访区域" icon="fa fa-angle-right" :required="true" :value="visitArea" readonly
+               @click.native="$router.push({name: 'addArea'})"/>
+      <y-input label="到访时间" placeholder="请选择到访时间" icon="fa fa-angle-right" :required="true"
+               :value="visitDate | formatTime" readonly @click.native="$refs.datepicker.open()"/>
+      <y-input label="到访类型" placeholder="请选择" icon="fa fa-angle-right" :required="true"
+               :value="visitType | dictTransform('visitType')" readonly @click.native="popupVisible = true"/>
+      <y-input label="携带物品" placeholder="添加携带物品" icon="fa fa-angle-right" :value="materials" readonly
+               @click.native="$router.push({name: 'addMaterial'})"/>
+      <y-input label="到访车辆" placeholder="添加到访车辆" icon="fa fa-angle-right" :value="cars" readonly
+               @click.native="$router.push({name: 'addCar'})"/>
     </div>
     <mt-button class="sumbit-btn" type="primary" size="large" @click.native="submit">提交</mt-button>
     <mt-datetime-picker
-        v-model="pickerValue"
-        ref="picker"
+        ref="datepicker"
         type="date"
         @confirm="handleConfirm">
-      </mt-datetime-picker>
+    </mt-datetime-picker>
     <mt-popup v-model="popupVisible" position="bottom" class="popup">
-      <mt-picker :slots="slots"
+      <mt-picker :slots="visitTypeSlots"
                   value-key="label"
-                  @change="onValuesChange"
                   :showToolbar="true"
-                  class="picker">
+                  class="picker"
+                  ref="mtpicker">
 				  <span @click="popupVisible = false">取消</span>
-				  <span @click="visitType = temp; popupVisible=false">确定</span>
+				  <span @click="saveSeleted">确定</span>
 			</mt-picker>
     </mt-popup>
   </div>
 </template>
 
 <script>
-import { visitTypeSlots, visitTypeDict } from '@/testData.js'
+import { visitTypeSlots } from '@/testData.js'
 import { Toast, MessageBox } from 'mint-ui'
 export default {
   name: 'guest-register',
   data () {
     return {
-      pickerValue: null,
       popupVisible: false,
-      slots: [],
-      temp: ''
+      visitTypeSlots,
     }
   },
   methods: {
     handleConfirm (value) {
       this.visitDate = value
     },
-    selectType () {
-      this.popupVisible = true
-      this.slots = visitTypeSlots
-    },
-    onValuesChange (picker, values) {
-      this.temp = values[0] ? values[0].value : ''
+    saveSeleted () {
+      const seleted = this.$refs.mtpicker.getSlotValue(0)
+      if(seleted) {
+        this.visitType = seleted.value
+      }
+      this.popupVisible = false
     },
     submit () {
       const registerData = this.registerData()
@@ -130,7 +134,7 @@ export default {
         MessageBox.confirm('当前页面信息还没保存，确定要离开？', '提示').then(action => {
           this.clearAll()
           next()
-        }).catch(()=>{})
+        }).catch(()=>{next(false)})
       }else next()
     }else next()
   }

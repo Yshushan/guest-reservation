@@ -10,7 +10,6 @@ export default new Vuex.Store({
     cars: [],
     employee: null,
     visitArea: null,
-    // mainArea: null,
     visitDate: null,
     visitType: null
   },
@@ -36,9 +35,6 @@ export default new Vuex.Store({
     deleteMaterial (state, name) {
       state.materials = state.materials.filter(m => m.name !== name)
     },
-    // updateMainArea (state, mainArea) {
-    //   state.mainArea = mainArea
-    // },
     updateVisitArea (state, value) {
       state.visitArea = value
     },
