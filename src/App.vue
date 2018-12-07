@@ -9,6 +9,7 @@
 @import url('https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css');
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  // font-family: "'Comic Sans MS', cursive, sans-serif";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
