@@ -1,6 +1,8 @@
 const Joi = require('joi')
 const bcrypt = require('bcrypt')
-const db = require('../db')
+const jwt = require('jsonwebtoken')
+const db = require('./db')
+const { secret } = require('./config')
 
 const registerSchema = {
   username: Joi.string().required(),
@@ -8,13 +10,14 @@ const registerSchema = {
   email: Joi.string().email().required()
 }
 
-function userInfoCheck(req, res, next) {
+
+function registerInfoCheck(req, res, next) {
   const { error, value } = Joi.validate(req.body, registerSchema)
   if (error) return res.status(400).send(error)
   else next()
 }
 
-function userExistenceCheck(req, res, next) {
+function registerExistenceCheck(req, res, next) {
   const users = db.get('users')
   users.findOne({ username: req.body.username }, (err, user) => {
     if (err) return next(err)
@@ -33,8 +36,31 @@ function userExistenceCheck(req, res, next) {
   })
 }
 
+function loginInfoCheck(req, res, next) {
+  const users = db.get('users')
+  users.findOne({ username: req.body.username }, (err, user) => {
+    if (err) return next(err)
+    if (user) {
+      if (bcrypt.compareSync(req.body.password, user.password)) next()
+      else res.send({ msg: '密码错误' })
+    } else res.send({ msg: '用户名不存在' })
+  })
+}
+
+function userAuthentication(req, res, next) {
+  try {
+    const payload = jwt.verify(req.get('token'), secret)
+    req.username = payload.username
+    next()
+  } catch (err) {
+    res.send({msg: '请登录', error: err})
+  }
+  
+}
 
 module.exports = {
-  userInfoCheck,
-  userExistenceCheck
+  registerInfoCheck,
+  registerExistenceCheck,
+  loginInfoCheck,
+  userAuthentication
 }

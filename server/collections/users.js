@@ -1,18 +1,10 @@
 const db = require('../db')
 
-db.createCollection('users', {
-  validator: {
-    $jsonSchema: {
-      bsonType: 'object',
-      required: ['username', 'password', 'email'],
-      properties: {
-        username: {bsonType: 'string'},
-        password: {bsonType: 'string'},
-        email: {bsonType: 'string'}
-      }
-    }
+const users = db.get('users')
+
+class Users {
+  
+  findByName(name){
+    users.findOne({username: name})
   }
-}, (err, client) => {
-  if(err) throw err
-  console.log('success', client)
-})
+}

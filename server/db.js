@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient
-const config = require('./config')
+const { dbName, dbUrl } = require('./config')
 
 let connection = null;
 
@@ -20,13 +20,13 @@ let connection = null;
 
 class Mongo {
   async connect() {
-    connection = await MongoClient.connect(config.dbUrl, { useNewUrlParser: true })
+    connection = await MongoClient.connect(dbUrl, { useNewUrlParser: true })
     return 'database connected'
-  }
+  }  
 
   get(collName) {
     if (!connection) throw new Error('connect database first!')
-    return connection.db(config.dbName).collection(collName)
+    return connection.db(dbName).collection(collName)
   }
 }
 

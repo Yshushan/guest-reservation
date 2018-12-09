@@ -1,15 +1,9 @@
 const register = require('express').Router()
-const registerGuard = require('../middleware/registerGuard')
-
+const {registerInfoCheck, registerExistenceCheck} = require('../routeGuard')
 const db = require('../db')
 
 
-register.use(
-  registerGuard.userInfoCheck,
-  registerGuard.userExistenceCheck,
-)
-
-register.post('/', (req, res, next) => {
+register.post('/', registerInfoCheck, registerExistenceCheck, (req, res, next) => {
   const users = db.get('users')
   users.insertOne(req.body, (err, insertedRes) => {
     if (err) next(err)
