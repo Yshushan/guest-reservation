@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const cors = require('cors')
 const { port } = require('./config')
 const db = require('./db')
 const register = require('./routes/register')
@@ -10,6 +11,7 @@ const reservation = require('./routes/reservation')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('combined'))
+app.use(cors())
 
 app.use('/register', register)
 app.use('/login', login)
@@ -27,7 +29,7 @@ db.connect()
   .then(msg => {
     console.log(msg)
     app.listen(port, () => {
-      console.log(`Server is running on localhost:${port}...`)
+      console.log(`Server is running at localhost:${port}...`)
     })
   })
   .catch(err => {

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import signUp from '@/views/login/signUp'
+import login from '@/views/login/login'
 import addCar from '@/views/guests/addCar'
 import addGuest from '@/views/guests/addGuest'
 import searchEmployee from '@/views/guests/searchEmployee'
@@ -24,12 +25,19 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
-    },
-    {
-      path: '/signUp',
-      name: 'signUp',
-      component: signUp
+      component: Home,
+      children: [
+        {
+          path: '/signUp',
+          name: 'signUp',
+          component: signUp
+        },
+        {
+          path: '/login',
+          name: 'login',
+          component: login
+        },
+      ]
     },
     {
       path: '/reservation/guestRegister',

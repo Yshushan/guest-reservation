@@ -18,16 +18,22 @@ let connection = null;
 //   return connection.db(config.dbName)
 // }
 
-class Mongo {
-  async connect() {
+module.exports = class {
+  // 链接数据库
+  static async connect() {
     connection = await MongoClient.connect(dbUrl, { useNewUrlParser: true })
     return 'database connected'
-  }  
+  }
 
-  get(collName) {
+  // 获取指定的 collection (非严格模式)
+  static get(collName) {
     if (!connection) throw new Error('connect database first!')
     return connection.db(dbName).collection(collName)
   }
-}
 
-module.exports = new Mongo()
+  // 获取数据库
+  static db() {
+    if (!connection) throw new Error('connect database first!')
+    return connection.db(dbName)
+  }
+}
